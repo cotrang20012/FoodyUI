@@ -46,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigation = findViewById(R.id.bottom_navigation);
         setEventNavigation();
+
     }
 
     protected  void setEventNavigation(){
         bottomNavigation.setOnItemSelectedListener(navListener);
+        bottomNavigation.setSelectedItemId(R.id.miHome);
     }
 }
