@@ -1,4 +1,4 @@
-package hcmute.spkt.nguyenphucan19110321.uidesign.adapter;
+package hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder;
 
 import android.view.View;
 import android.widget.ImageView;

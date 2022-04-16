@@ -5,18 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.Base64;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
+import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodHomeHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
 
 public class FoodHomeAdapter extends BaseAdapter {
