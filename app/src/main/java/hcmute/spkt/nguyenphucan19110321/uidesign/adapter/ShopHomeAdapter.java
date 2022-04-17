@@ -12,17 +12,19 @@ import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.ShopHomeHolder;
+import hcmute.spkt.nguyenphucan19110321.uidesign.event.IClickItemShopHomeListener;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
 public class ShopHomeAdapter extends BaseAdapter {
     private Context context;
     private List<Shop> shopList;
     private LayoutInflater layoutInflater;
-
-    public ShopHomeAdapter(Context context, List<Shop> shopList) {
+    private IClickItemShopHomeListener iClickItemShopHomeListener;
+    public ShopHomeAdapter(Context context, List<Shop> shopList, IClickItemShopHomeListener iClickItemShopHomeListener) {
         this.shopList = shopList;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
+        this.iClickItemShopHomeListener = iClickItemShopHomeListener;
     }
 
 
@@ -55,6 +57,12 @@ public class ShopHomeAdapter extends BaseAdapter {
         Picasso.get().load(shop.getImage()).into(holder.imvItemShop);
         holder.lbName.setText(shop.getName());
         holder.lbDesc.setText(shop.getDescription());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickItemShopHomeListener.onClickItemShopHome(shop);
+            }
+        });
         return view;
     }
 }

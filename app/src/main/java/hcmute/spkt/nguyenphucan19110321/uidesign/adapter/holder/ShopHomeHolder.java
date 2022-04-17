@@ -16,8 +16,8 @@ public class ShopHomeHolder extends RecyclerView.ViewHolder {
 
     public ShopHomeHolder(@NonNull View itemView) {
         super(itemView);
-        imvItemShop = itemView.findViewById(R.id.imvItemShop);
-        lbName = itemView.findViewById(R.id.tvNameFoodHome);
+        imvItemShop = itemView.findViewById(R.id.imvItemShopHome);
+        lbName = itemView.findViewById(R.id.tvNameShopHome);
         lbDesc = itemView.findViewById(R.id.tvDescriptionShopHome);
     }
 }
