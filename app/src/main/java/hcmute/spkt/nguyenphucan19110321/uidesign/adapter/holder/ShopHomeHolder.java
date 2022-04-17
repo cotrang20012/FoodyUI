@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 
-public class FoodHomeHolder extends RecyclerView.ViewHolder {
-    public final ImageView imvItemFood;
+public class ShopHomeHolder extends RecyclerView.ViewHolder {
+    public final ImageView imvItemShop;
     public final TextView lbName,lbDesc;
 
 
-    public  FoodHomeHolder(@NonNull View itemView) {
+    public ShopHomeHolder(@NonNull View itemView) {
         super(itemView);
-        imvItemFood = itemView.findViewById(R.id.imvItemFood);
+        imvItemShop = itemView.findViewById(R.id.imvItemShop);
         lbName = itemView.findViewById(R.id.tvNameFoodHome);
-        lbDesc = itemView.findViewById(R.id.tvDescriptionFoodHome);
+        lbDesc = itemView.findViewById(R.id.tvDescriptionShopHome);
     }
 }

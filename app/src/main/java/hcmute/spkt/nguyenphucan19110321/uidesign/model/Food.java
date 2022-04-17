@@ -5,11 +5,7 @@ public class Food {
     protected String name;
     protected String description;
     protected String image;
-    protected String imageSearch;
-    protected String address;
-    protected String type;
-    protected double rate;
-
+    protected int price;
 
     public String getId() {
         return id;
@@ -43,57 +39,19 @@ public class Food {
         this.image = image;
     }
 
-    public String getImageSearch() {
-        return imageSearch;
+    public int getPrice() {
+        return price;
     }
 
-    public void setImageSearch(String imageSearch) {
-        this.imageSearch = imageSearch;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public Food() {
-    }
-
-    public Food(String id, String name, String description, String image) {
+    public Food(String id, String name, String des, String img, int price){
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.image = image;
+        this.description = des;
+        this.image=img;
+        this.price = price;
     }
-
-    public Food(String id, String name, String description, String image, String imageSearch, String address, String type, double rate) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.image = image;
-        this.imageSearch = imageSearch;
-        this.address = address;
-        this.type = type;
-        this.rate = rate;
-    }
-
 }

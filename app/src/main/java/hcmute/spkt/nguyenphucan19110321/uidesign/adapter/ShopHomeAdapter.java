@@ -11,16 +11,16 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
-import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodHomeHolder;
-import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
+import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.ShopHomeHolder;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
-public class FoodHomeAdapter extends BaseAdapter {
+public class ShopHomeAdapter extends BaseAdapter {
     private Context context;
-    private List<Food> foodList;
+    private List<Shop> shopList;
     private LayoutInflater layoutInflater;
 
-    public FoodHomeAdapter(Context context, List<Food> foodList) {
-        this.foodList = foodList;
+    public ShopHomeAdapter(Context context, List<Shop> shopList) {
+        this.shopList = shopList;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
     }
@@ -28,12 +28,12 @@ public class FoodHomeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return foodList.size();
+        return shopList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return foodList.get(i);
+        return shopList.get(i);
     }
 
     @Override
@@ -43,18 +43,18 @@ public class FoodHomeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        FoodHomeHolder holder;
+        ShopHomeHolder holder;
         if (view == null) {
-            view = layoutInflater.inflate(R.layout.item_food_home, viewGroup,false);
-            holder = new FoodHomeHolder(view);
+            view = layoutInflater.inflate(R.layout.item_shop_home, viewGroup,false);
+            holder = new ShopHomeHolder(view);
             view.setTag(holder);
         } else {
-            holder = (FoodHomeHolder) view.getTag();
+            holder = (ShopHomeHolder) view.getTag();
         }
-        Food food = foodList.get(i);
-        Picasso.get().load(food.getImage()).into(holder.imvItemFood);
-        holder.lbName.setText(food.getName());
-        holder.lbDesc.setText(food.getDescription());
+        Shop shop = shopList.get(i);
+        Picasso.get().load(shop.getImage()).into(holder.imvItemShop);
+        holder.lbName.setText(shop.getName());
+        holder.lbDesc.setText(shop.getDescription());
         return view;
     }
 }
