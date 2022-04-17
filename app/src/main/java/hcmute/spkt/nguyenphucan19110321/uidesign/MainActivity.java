@@ -13,9 +13,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.AccountFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.HomeFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.ListFragment;
-import hcmute.spkt.nguyenphucan19110321.uidesign.view.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new ListFragment();
                     break;
                 }
-                case R.id.miPerson: {
-                    selectedFragment = new ProfileFragment();
+                case R.id.miAccount: {
+                    selectedFragment = new AccountFragment();
                     break;
                 }
                 default:

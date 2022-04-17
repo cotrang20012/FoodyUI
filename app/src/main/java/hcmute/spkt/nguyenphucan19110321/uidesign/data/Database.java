@@ -67,6 +67,10 @@ public class Database {
         SHOP_LIST.add(f6);
         SHOP_LIST.add(f7);
         SHOP_LIST.add(f8);
+        SHOP_LIST.add(f7);
+        SHOP_LIST.add(f8);
+        SHOP_LIST.add(f7);
+        SHOP_LIST.add(f8);
     }
 
     public static final void MakeDataFood(){

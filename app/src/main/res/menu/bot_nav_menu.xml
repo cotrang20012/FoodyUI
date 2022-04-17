@@ -4,26 +4,26 @@
         android:id="@+id/miHome"
         android:enabled="true"
         android:icon="@drawable/ic_round_home_24"
-        android:title="Home"/>
+        android:title="Trang chủ"/>
     <item
         android:id="@+id/miBookmark"
         android:enabled="true"
         android:icon="@drawable/ic_round_bookmark_24"
-        android:title="Bookmark"/>
+        android:title="Lưu trữ"/>
     <item
         android:id="@+id/miList"
         android:enabled="true"
         android:icon="@drawable/ic_round_list_24"
-        android:title="List"/>
+        android:title="Hoá đơn"/>
     <item
         android:id="@+id/miNotification"
         android:enabled="true"
         android:icon="@drawable/ic_round_notifications_24"
-        android:title="Notification"/>
+        android:title="Thông báo"/>
 
     <item
-        android:id="@+id/miPerson"
+        android:id="@+id/miAccount"
         android:enabled="true"
         android:icon="@drawable/ic_round_person_24"
-        android:title="Person"/>
+        android:title="Tài khoản"/>
 </menu>
