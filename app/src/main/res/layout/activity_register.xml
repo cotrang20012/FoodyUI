@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
     tools:context=".RegisterActivity">
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/line1_vertical"
@@ -27,6 +28,7 @@
         android:id="@+id/useLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/foody_logo"
         app:layout_constraintTop_toBottomOf="@+id/line1_horizontal"
         app:layout_constraintBottom_toTopOf="@id/line2_horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -40,6 +42,8 @@
         android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:drawablePadding="5dp"
         android:hint="@string/name_register"
+        android:textColor="@color/txt_color_white"
+        android:textColorHint="@color/txt_color_white"
         android:inputType="textPersonName"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
@@ -49,84 +53,48 @@
         app:layout_constraintTop_toBottomOf="@id/line2_horizontal">
 
     </EditText>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/phonenumber_wrap"
-        android:layout_width="match_parent"
+
+    <EditText
+        android:id="@+id/txtEmailRegister"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawablePadding="5dp"
+        android:drawingCacheQuality="high"
 
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:background="#00FFFFFF"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
+        android:hint="@string/email"
+        android:inputType="text"
+        android:outlineProvider="none"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/txt_color_white"
+        android:textColorHint="@color/txt_color_white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtNameRegister">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtNameRegister" />
 
-        <ImageView
-            android:id="@+id/imgIconPhone"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ccp"
-            app:srcCompat="@drawable/ic_baseline_phone_android_24" />
-
-        <EditText
-            android:id="@+id/txtPhoneRegister"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:drawablePadding="5dp"
-            android:hint="@string/phone"
-            android:inputType="phone"
-            android:outlineProvider="none"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="8"
-            app:layout_constraintStart_toEndOf="@id/ccp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/ccp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layoutMode="clipBounds"
-            app:ccp_defaultLanguage="VIETNAMESE"
-            app:ccp_defaultNameCode="VN"
-            app:ccp_showFlag="false"
-            app:ccp_showNameCode="false"
-            app:ccp_showPhoneCode="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/txtPhoneRegister"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintHorizontal_weight="2"
-            app:layout_constraintStart_toEndOf="@id/imgIconPhone"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ccp_contentColor="#fcfdfd"
-            tools:ccp_textSize="20dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:id="@+id/txtPasswordRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:drawablePadding="5dp"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:textColor="@color/txt_color_white"
+        android:textColorHint="@color/txt_color_white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
 
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phonenumber_wrap" >
+        app:layout_constraintTop_toBottomOf="@id/txtEmailRegister" >
 
     </EditText>
 
@@ -152,9 +120,9 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-
+        android:textColor="@color/txt_color_white"
         android:text="@string/goto_login"
-        android:textColor="@color/txt_color"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
