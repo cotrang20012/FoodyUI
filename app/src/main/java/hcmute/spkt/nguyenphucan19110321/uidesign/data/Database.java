@@ -19,7 +19,7 @@ public class Database {
                 "94/22/2A Phú Thọ Hòa, P. Phú Thọ Hòa, TP.Thủ Đức, TP.HCM","Shop Online",9.4);
 
         Shop f2 = new Shop("2","Thành Mập - Chân Gà Rút Xương Ngâm Sả Tắc - Bạch Đằng - Shop Online",
-                "Nhân viên ngon xĩu luônnnn =))))))))",
+                "Đồ ăn ngon xĩu luônnnn =))))))))",
                 "https://images.foody.vn/res/g100/990502/prof/s640x400/foody-upload-api-foody-mobile-foody-upload-api-foo-191216172331.jpg",
                 "https://images.foody.vn/res/g105/1041514/s120x120/2b06d3a1-dbfb-4a88-a672-f94878a8-a63f4179-201119124832.jpeg",
                 "94/22/2A Phú Thọ Hòa, P. Phú Thọ Hòa, TP.Thủ Đức, TP.HCM","Shop Online",9.4
