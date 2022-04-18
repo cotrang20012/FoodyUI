@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
 public class Database {
     public static final List<Shop> SHOP_LIST = new ArrayList<>();
     public static final List<Food> FOOD_LIST = new ArrayList<>();
+    public static final List<Order> ORDER_LIST = new ArrayList<>();
     public static final void MakeData(){
         Shop f1 = new Shop("1","Gogi House - Quán Nướng Hàn Quốc - Saigon Centre",
                 "Vài ngày là lại tới gogi một lần nè, món ăn thì khỏi bàn luônnnn, nhân viên thì nhiệt tình, anh chị quản lý dễ thương xĩu luônnnn",
@@ -87,4 +89,13 @@ public class Database {
         FOOD_LIST.add(f2);
         FOOD_LIST.add(f3);
     }
+    public static final void MakeDataOrder(){
+        Order order1 = new Order("1","Chân gà xé",2,53000);
+        Order order2 = new Order("1","Chân gà nướng",3,60000);
+        Order order3 = new Order("1","Chân gà xé",1,70000);
+        ORDER_LIST.add(order1);
+        ORDER_LIST.add(order3);
+        ORDER_LIST.add(order2);
+    }
+
 }

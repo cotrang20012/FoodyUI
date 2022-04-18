@@ -12,10 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UIDesign">
         <activity
-            android:name=".ShopDetailActivity"
-            android:exported="true" >
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ShopDetailActivity"
+            android:exported="true" />
         <activity
             android:name=".SearchActivity"
             android:exported="false" />
@@ -24,16 +35,10 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true">
         </activity>
     </application>
 
