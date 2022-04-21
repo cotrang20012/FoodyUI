@@ -1,4 +1,4 @@
-package hcmute.spkt.nguyenphucan19110321.uidesign;
+package hcmute.spkt.nguyenphucan19110321.uidesign.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodCartAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;

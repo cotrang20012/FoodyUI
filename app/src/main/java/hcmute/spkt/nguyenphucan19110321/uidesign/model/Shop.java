@@ -1,7 +1,14 @@
 package hcmute.spkt.nguyenphucan19110321.uidesign.model;
 
+import android.database.Cursor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
+
 public class Shop {
-    protected String id;
+    protected int id;
     protected String name;
     protected String description;
     protected String image;
@@ -11,11 +18,11 @@ public class Shop {
     protected double rate;
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -78,14 +85,14 @@ public class Shop {
     public Shop() {
     }
 
-    public Shop(String id, String name, String description, String image) {
+    public Shop(int id, String name, String description, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
     }
 
-    public Shop(String id, String name, String description, String image, String imageSearch, String address, String type, double rate) {
+    public Shop(int id, String name, String description, String image, String imageSearch, String address, String type, double rate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -94,6 +101,34 @@ public class Shop {
         this.address = address;
         this.type = type;
         this.rate = rate;
+    }
+
+    public void InsertToDatabase(Database db){
+        String[] params = new String[8] ;
+        params[0]=String.valueOf(this.id);
+        params[1]=this.name;
+        params[2]=this.description;
+        params[3]=this.image;
+        params[4]=this.imageSearch;
+        params[5]=this.address;
+        params[6]=this.type;
+        params[7]=String.valueOf(this.rate);
+        db.ExecQuery("insert into Shops values(?,?,?,?,?,?,?,?)",params);
+    }
+
+    public List<Food> GetFoodInShop(Database db){
+        Cursor cursor = db.SelectData("select * from Foods where idShop="+String.valueOf(this.id));
+        List<Food> foodList = new ArrayList<>();
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String des = cursor.getString(2);
+            String image = cursor.getString(3);
+            int price = cursor.getInt(4);
+            int idShop = cursor.getInt(5);
+            foodList.add(new Food(id, name,des,image,price,idShop));
+        }
+        return foodList;
     }
 
 }

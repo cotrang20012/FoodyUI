@@ -1,4 +1,4 @@
-package hcmute.spkt.nguyenphucan19110321.uidesign.view;
+package hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,11 +14,11 @@ import android.widget.GridView;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
-import hcmute.spkt.nguyenphucan19110321.uidesign.ShopDetailActivity;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.ShopDetailActivity;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.ShopHomeAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 import hcmute.spkt.nguyenphucan19110321.uidesign.event.IClickItemShopHomeListener;
@@ -27,7 +27,9 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
 public class HomeFragment extends Fragment {
 
-    GridView gridViewFoodHome;
+    private GridView gridViewFoodHome;
+    private Database database;
+    private List<Shop> shopList;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -50,10 +52,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gridViewFoodHome = view.findViewById(R.id.gridViewFoodHome);
-        if(Database.SHOP_LIST.size()==0){
-            Database.MakeData();
-        }
-        ShopHomeAdapter shopHomeAdapter = new ShopHomeAdapter(this.getContext(), Database.SHOP_LIST, new IClickItemShopHomeListener() {
+         database= new Database(this.getContext(),"Foody.sqlite",null,1);
+        shopList = DatabaseFactory.getListShop(database);
+        ShopHomeAdapter shopHomeAdapter = new ShopHomeAdapter(this.getContext(), shopList, new IClickItemShopHomeListener() {
             @Override
             public void onClickItemShopHome(Shop shop) {
                 GoToShopDetail(shop);

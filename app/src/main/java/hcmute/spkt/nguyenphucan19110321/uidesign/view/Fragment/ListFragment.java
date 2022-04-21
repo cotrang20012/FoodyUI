@@ -1,4 +1,4 @@
-package hcmute.spkt.nguyenphucan19110321.uidesign.view;
+package hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment;
 
 import android.os.Bundle;
 

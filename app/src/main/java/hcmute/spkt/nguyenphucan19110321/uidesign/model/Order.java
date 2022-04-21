@@ -1,16 +1,16 @@
 package hcmute.spkt.nguyenphucan19110321.uidesign.model;
 
 public class Order {
-    protected String id;
+    protected int id;
     protected String name;
     protected int number;
     protected int price;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -40,7 +40,7 @@ public class Order {
     public Order(){
 
     }
-    public Order(String id, String name, int number, int price) {
+    public Order(int id, String name, int number, int price) {
         this.id = id;
         this.name = name;
         this.number = number;

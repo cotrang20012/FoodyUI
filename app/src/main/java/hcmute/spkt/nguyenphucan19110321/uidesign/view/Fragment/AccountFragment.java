@@ -1,4 +1,4 @@
-package hcmute.spkt.nguyenphucan19110321.uidesign.view;
+package hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import hcmute.spkt.nguyenphucan19110321.uidesign.LoginActivity;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.LoginActivity;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 
 public class AccountFragment extends Fragment {

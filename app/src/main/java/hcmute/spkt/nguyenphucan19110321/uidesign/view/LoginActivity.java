@@ -1,10 +1,12 @@
-package hcmute.spkt.nguyenphucan19110321.uidesign;
+package hcmute.spkt.nguyenphucan19110321.uidesign.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 
 public class LoginActivity extends AppCompatActivity {
 

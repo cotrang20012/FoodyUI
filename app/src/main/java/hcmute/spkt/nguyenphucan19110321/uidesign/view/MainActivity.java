@@ -1,4 +1,4 @@
-package hcmute.spkt.nguyenphucan19110321.uidesign;
+package hcmute.spkt.nguyenphucan19110321.uidesign.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,14 +12,17 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
-import hcmute.spkt.nguyenphucan19110321.uidesign.view.AccountFragment;
-import hcmute.spkt.nguyenphucan19110321.uidesign.view.HomeFragment;
-import hcmute.spkt.nguyenphucan19110321.uidesign.view.ListFragment;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.AccountFragment;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.HomeFragment;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.ListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;
+    private Database database;
     private NavigationBarView.OnItemSelectedListener navListener = new NavigationBarView.OnItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -51,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bottomNavigation = findViewById(R.id.bottom_navigation);
-        setEventNavigation();
-        if(Database.SHOP_LIST.size()==0){
-            Database.MakeData();
-        }
 
+        Database database = new Database(this,"Foody.sqlite",null,1);
+        DatabaseFactory.CreateDatabase(database);
+        DatabaseFactory.MakeData(database);
+        DatabaseFactory.MakeDataFood(database); bottomNavigation = findViewById(R.id.bottom_navigation);
+        setEventNavigation();
     }
 
     protected  void setEventNavigation(){
@@ -68,4 +71,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,SearchActivity.class);
         startActivity(intent);
     }
+
 }

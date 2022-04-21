@@ -2,25 +2,20 @@ package hcmute.spkt.nguyenphucan19110321.uidesign.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
-import hcmute.spkt.nguyenphucan19110321.uidesign.CartActivity;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.CartActivity;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodHolder;
-import hcmute.spkt.nguyenphucan19110321.uidesign.event.IClickItemShopHomeListener;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {

@@ -1,4 +1,4 @@
-package hcmute.spkt.nguyenphucan19110321.uidesign;
+package hcmute.spkt.nguyenphucan19110321.uidesign.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,17 +16,21 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
 public class ShopDetailActivity extends AppCompatActivity {
 
     RecyclerView recycleViewFoodMost;
+    private Shop shop;
     List<Food> foodList = new ArrayList<>();
     private TextView tvTitleShopDetail,tvNameShopDetail, tvAddressShopDetail,tvTypeShopDetail,tvRangePriceShopDetail;
     private ImageView imgShopDetail;
+    Database database=new Database(this,"Foody.sqlite",null,1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,7 @@ public class ShopDetailActivity extends AppCompatActivity {
         if(getIntent().getStringExtra("Shop")!=null){
             String shopJSON = getIntent().getStringExtra("Shop");
             Gson gson = new Gson();
-            Shop shop = gson.fromJson(shopJSON,Shop.class);
+            shop = gson.fromJson(shopJSON,Shop.class);
             tvTitleShopDetail.setText(shop.getName());
             tvNameShopDetail.setText(shop.getName());
             tvAddressShopDetail.setText(shop.getAddress());
@@ -64,11 +68,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     }
 
     private void LoadListFood(){
-        if(Database.FOOD_LIST.size()==0){
-            Database.MakeDataFood();
-        }
-
-        FoodAdapter foodAdapter =new FoodAdapter(this, Database.FOOD_LIST);
+        FoodAdapter foodAdapter =new FoodAdapter(this, shop.GetFoodInShop(database));
         LinearLayoutManager linear =new LinearLayoutManager(this);
 
         recycleViewFoodMost.setAdapter(foodAdapter);

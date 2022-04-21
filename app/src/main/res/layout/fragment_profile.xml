@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".view.ProfileFragment">
+    tools:context=".view.Fragment.ProfileFragment">
 
 
     <LinearLayout
@@ -40,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="394dp"
         android:layout_gravity="bottom"
+
         android:background="#FFFFFF"
         android:orientation="vertical">
 
@@ -58,6 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="153/24 Lê Hoàng Phái"
             android:textSize="18dp" />
 
@@ -68,6 +71,7 @@
             android:layout_marginBottom="5dp"
             android:background="#E4BCBC"
             android:text="Giới Tính"
+
             android:textSize="24dp"
             android:textStyle="bold" />
 
@@ -76,6 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="Nam"
             android:textSize="18dp" />
 
@@ -95,8 +101,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:text="0928776640"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:textSize="18dp" />
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sửa"
+            android:backgroundTint="@color/main_color_bg"
+            android:layout_gravity="center"
+/>
     </LinearLayout>
 
 </FrameLayout>

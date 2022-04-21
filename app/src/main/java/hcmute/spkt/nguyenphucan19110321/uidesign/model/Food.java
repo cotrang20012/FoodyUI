@@ -1,17 +1,28 @@
 package hcmute.spkt.nguyenphucan19110321.uidesign.model;
 
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
+
 public class Food {
-    protected String id;
+    protected int id;
     protected String name;
     protected String description;
     protected String image;
     protected int price;
+    protected int idShop;
 
-    public String getId() {
+    public int getIdShop() {
+        return idShop;
+    }
+
+    public void setIdShop(int idShop) {
+        this.idShop = idShop;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -47,11 +58,24 @@ public class Food {
         this.price = price;
     }
 
-    public Food(String id, String name, String des, String img, int price){
+    public Food(int id, String name, String des, String img, int price,int idShop){
         this.id = id;
         this.name = name;
         this.description = des;
         this.image=img;
         this.price = price;
+        this.idShop=idShop;
     }
+
+    public void InsertToDatabase(Database db){
+        String[] params = new String[6] ;
+        params[0]=String.valueOf(this.id);
+        params[1]=this.name;
+        params[2]=this.description;
+        params[3]=this.image;
+        params[4]=String.valueOf(this.price);
+        params[5]=String.valueOf(this.idShop);
+        db.ExecQuery("insert into Foods values(?,?,?,?,?,?)",params);
+    }
+
 }
