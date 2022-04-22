@@ -46,6 +46,10 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery(query, null);
     }
+    public Cursor SelectData(String query,String[] params) {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery(query,params);
+    }
 
 
     @Override

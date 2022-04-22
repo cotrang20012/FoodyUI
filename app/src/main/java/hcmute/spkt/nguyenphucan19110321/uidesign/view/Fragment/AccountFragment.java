@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import hcmute.spkt.nguyenphucan19110321.uidesign.ProfileActivity;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.LoginActivity;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 
@@ -35,6 +37,7 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         SetControl(view);
         SetEvent();
+        LoadData();
     }
 
     public void SetControl(View view) {
@@ -45,13 +48,28 @@ public class AccountFragment extends Fragment {
         btnGoToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GoToLogin();
+
+                if (GLOBAL.USER != null)
+                    GoToProfile();
+                else
+                    GoToLogin();
             }
         });
+    }
+
+    private void GoToProfile() {
+        Intent intent = new Intent(getContext(), ProfileActivity.class);
+        startActivity(intent);
     }
 
     private void GoToLogin() {
         Intent intent = new Intent(getContext(), LoginActivity.class);
         startActivity(intent);
+    }
+
+    private void LoadData() {
+        if (GLOBAL.USER != null) {
+            btnGoToLogin.setText("Thông tin tài khoản");
+        }
     }
 }

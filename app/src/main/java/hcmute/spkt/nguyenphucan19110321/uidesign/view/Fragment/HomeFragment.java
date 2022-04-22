@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gridViewFoodHome = view.findViewById(R.id.gridViewFoodHome);
-         database= new Database(this.getContext(),"Foody.sqlite",null,1);
+        database= new Database(this.getContext(),"Foody.sqlite",null,1);
         shopList = DatabaseFactory.getListShop(database);
         ShopHomeAdapter shopHomeAdapter = new ShopHomeAdapter(this.getContext(), shopList, new IClickItemShopHomeListener() {
             @Override
