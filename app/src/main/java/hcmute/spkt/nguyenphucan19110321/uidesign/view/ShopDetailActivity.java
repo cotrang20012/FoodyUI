@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
-import android.net.wifi.aware.ParcelablePeerHandle;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +76,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     }
     private void SetEvent(){
         btnSaveShop.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceType")
             @Override
             public void onClick(View view) {
                 if(GLOBAL.USER!=null){
@@ -93,7 +96,6 @@ public class ShopDetailActivity extends AppCompatActivity {
                         btnSaveShop.setCompoundDrawables(img, null, null, null);
                         btnSaveShop.setTag(true);
                     }
-
                 }
                 else {
                     Toast.makeText(ShopDetailActivity.this,"Bạn phải đăng nhập để thực hiện tính năng này",Toast.LENGTH_SHORT).show();
