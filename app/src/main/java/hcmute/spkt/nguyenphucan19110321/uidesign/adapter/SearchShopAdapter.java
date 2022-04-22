@@ -13,13 +13,14 @@ import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.SearchShopHolder;
+import hcmute.spkt.nguyenphucan19110321.uidesign.mapping.SaveShopMapping;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
 public class SearchShopAdapter extends RecyclerView.Adapter<SearchShopHolder> {
     Context context;
-    List<Shop> shopList;
+    List<SaveShopMapping> shopList;
 
-    public SearchShopAdapter(Context context, List<Shop> list) {
+    public SearchShopAdapter(Context context, List<SaveShopMapping> list) {
         this.shopList = list;
         this.context = context;
     }
@@ -32,12 +33,12 @@ public class SearchShopAdapter extends RecyclerView.Adapter<SearchShopHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SearchShopHolder holder, int position) {
-        Shop shop = shopList.get(position);
-        Picasso.get().load(shop.getImageSearch()).into(holder.imgShopSearch);
-        holder.tvNameShopSearch.setText(shop.getName());
-        holder.tvAddressShopSearch.setText(shop.getAddress());
-        holder.tvTypeStoreShopSearch.setText(shop.getType());
-        holder.tvRateShopSearch.setText(String.valueOf(shop.getRate()));
+        SaveShopMapping save = shopList.get(position);
+        Picasso.get().load(save.getImage()).into(holder.imgShopSearch);
+        holder.tvNameShopSearch.setText(save.getNameShop());
+        holder.tvAddressShopSearch.setText(save.getAddress());
+        holder.tvTypeStoreShopSearch.setText(save.getType());
+        holder.tvRateShopSearch.setText(String.valueOf(save.getRate()));
     }
 
     @Override

@@ -1,8 +1,10 @@
 package hcmute.spkt.nguyenphucan19110321.uidesign.model;
 
+import java.io.Serializable;
+
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 
-public class Food {
+public class Food implements Serializable {
     protected int id;
     protected String name;
     protected String description;

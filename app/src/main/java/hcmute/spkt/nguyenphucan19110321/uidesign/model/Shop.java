@@ -2,12 +2,13 @@ package hcmute.spkt.nguyenphucan19110321.uidesign.model;
 
 import android.database.Cursor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 
-public class Shop {
+public class Shop implements Serializable {
     protected int id;
     protected String name;
     protected String description;

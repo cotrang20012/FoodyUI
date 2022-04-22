@@ -18,6 +18,7 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.AccountFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.HomeFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.ListFragment;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.SavedFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case R.id.miAccount: {
                     selectedFragment = new AccountFragment();
+                    break;
+                }
+                case R.id.miBookmark: {
+                    selectedFragment = new SavedFragment();
                     break;
                 }
                 default:

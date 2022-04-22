@@ -29,11 +29,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void LoadData(){
-        Toast.makeText(SearchActivity.this, String.valueOf(Database.SHOP_LIST.size()), Toast.LENGTH_SHORT).show();
-        SearchShopAdapter searchShopAdapter =new SearchShopAdapter(this, Database.SHOP_LIST);
-        LinearLayoutManager linear =new LinearLayoutManager(this);
-        recycleViewSearchFood.setAdapter(searchShopAdapter);
-        recycleViewSearchFood.setLayoutManager(linear);
+//        //SearchShopAdapter searchShopAdapter =new SearchShopAdapter(this, Database.SHOP_LIST);
+//        LinearLayoutManager linear =new LinearLayoutManager(this);
+//        recycleViewSearchFood.setAdapter(searchShopAdapter);
+//        recycleViewSearchFood.setLayoutManager(linear);
     }
 
     public void onClickBack(View view) {

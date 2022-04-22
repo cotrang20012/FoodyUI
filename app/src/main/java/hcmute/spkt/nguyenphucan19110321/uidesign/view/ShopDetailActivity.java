@@ -5,10 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.wifi.aware.ParcelablePeerHandle;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -20,7 +24,10 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.DAO.SaveShopDAO;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.SaveShop;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
 public class ShopDetailActivity extends AppCompatActivity {
@@ -30,28 +37,69 @@ public class ShopDetailActivity extends AppCompatActivity {
     List<Food> foodList = new ArrayList<>();
     private TextView tvTitleShopDetail,tvNameShopDetail, tvAddressShopDetail,tvTypeShopDetail,tvRangePriceShopDetail;
     private ImageView imgShopDetail;
-    Database database=new Database(this,"Foody.sqlite",null,1);
+    private Button btnSaveShop;
+    Database database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_detail);
+        database = new Database(this,"Foody.sqlite",null,1);
         SetControl();
         LoadDataFromIntent();
         LoadListFood();
+        SetEvent();
     }
 
     private void LoadDataFromIntent() {
-        if(getIntent().getStringExtra("Shop")!=null){
-            String shopJSON = getIntent().getStringExtra("Shop");
-            Gson gson = new Gson();
-            shop = gson.fromJson(shopJSON,Shop.class);
+        if(getIntent().getSerializableExtra("Shop")!=null){
+            shop = (Shop)getIntent().getSerializableExtra("Shop");
             tvTitleShopDetail.setText(shop.getName());
             tvNameShopDetail.setText(shop.getName());
             tvAddressShopDetail.setText(shop.getAddress());
             Picasso.get().load(shop.getImage()).into(imgShopDetail);
+
+            if(GLOBAL.USER!=null){
+                SaveShopDAO saveShopDAO = new SaveShopDAO(database);
+                boolean saved = saveShopDAO.existSaved(shop.getId(),GLOBAL.USER.getId());
+                if(saved){
+                    Drawable img = this.getDrawable(R.drawable.ic_baseline_bookmark_24);
+                    img.setBounds(0, 0, 60, 60);
+                    btnSaveShop.setCompoundDrawables(img, null, null, null);
+                    btnSaveShop.setTag(true);
+                }
+            }
         }
 
+    }
+    private void SetEvent(){
+        btnSaveShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(GLOBAL.USER!=null){
+                    if((boolean) btnSaveShop.getTag()){
+                        database.ExecQuery("delete from Saveds where idShop="+String.valueOf(shop.getId())+" and" +
+                                " idUser="+String.valueOf(GLOBAL.USER.getId()));
+                        Drawable img = getApplication().getDrawable(R.drawable.ic_baseline_bookmark_border_24);
+                        img.setBounds(0, 0, 60, 60);
+                        btnSaveShop.setCompoundDrawables(img, null, null, null);
+                        btnSaveShop.setTag(false);
+                    }
+                    else {
+                        SaveShop saveShop = new SaveShop(shop.getId(),GLOBAL.USER.getId());
+                        saveShop.InsertToDatabase(database);
+                        Drawable img = getApplication().getDrawable(R.drawable.ic_baseline_bookmark_24);
+                        img.setBounds(0, 0, 60, 60);
+                        btnSaveShop.setCompoundDrawables(img, null, null, null);
+                        btnSaveShop.setTag(true);
+                    }
+
+                }
+                else {
+                    Toast.makeText(ShopDetailActivity.this,"Bạn phải đăng nhập để thực hiện tính năng này",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void SetControl(){
@@ -60,6 +108,7 @@ public class ShopDetailActivity extends AppCompatActivity {
         tvTitleShopDetail = findViewById(R.id.tvTitleShopDetail);
         tvNameShopDetail  =findViewById(R.id.tvNameShopDetail);
         tvAddressShopDetail = findViewById(R.id.tvAddressShopDetail);
+        btnSaveShop = findViewById(R.id.btnSaveShop);
     }
 
     public void onClickBack(View view) {
@@ -70,13 +119,8 @@ public class ShopDetailActivity extends AppCompatActivity {
     private void LoadListFood(){
         FoodAdapter foodAdapter =new FoodAdapter(this, shop.GetFoodInShop(database));
         LinearLayoutManager linear =new LinearLayoutManager(this);
-
         recycleViewFoodMost.setAdapter(foodAdapter);
         recycleViewFoodMost.setLayoutManager(linear);
     }
 
-    private void GoToShopDetail(Shop shop) {
-        Intent intent = new Intent();
-
-    }
 }

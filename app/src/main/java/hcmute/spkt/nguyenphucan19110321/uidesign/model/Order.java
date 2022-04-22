@@ -1,6 +1,8 @@
 package hcmute.spkt.nguyenphucan19110321.uidesign.model;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     protected int id;
     protected String name;
     protected int number;

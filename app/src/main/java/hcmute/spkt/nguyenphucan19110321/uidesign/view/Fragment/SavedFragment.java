@@ -6,10 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.google.gson.Gson;
@@ -17,7 +20,12 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
+import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.SavedAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
+import hcmute.spkt.nguyenphucan19110321.uidesign.mapping.SaveShopMapping;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.DAO.UserDAO;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.SaveShop;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.ShopDetailActivity;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.ShopHomeAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
@@ -25,12 +33,12 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.event.IClickItemShopHomeListene
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
 
-public class HomeFragment extends Fragment {
+public class SavedFragment extends Fragment {
 
-    private GridView gridViewFoodHome;
+    private RecyclerView recyclerViewSaved;
     private Database database;
-    private List<Shop> shopList;
-    public HomeFragment() {
+    private Button btnGotoLogin;
+    public SavedFragment() {
         // Required empty public constructor
     }
 
@@ -45,29 +53,35 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_saved_shop, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        gridViewFoodHome = view.findViewById(R.id.gridViewFoodHome);
+        recyclerViewSaved = view.findViewById(R.id.recyclerViewSaved);
+        btnGotoLogin = view.findViewById(R.id.btnGoToLoginFromSaved);
         database= new Database(this.getContext(),"Foody.sqlite",null,1);
-        shopList = DatabaseFactory.getListShop(database);
-        ShopHomeAdapter shopHomeAdapter = new ShopHomeAdapter(this.getContext(), shopList, new IClickItemShopHomeListener() {
-            @Override
-            public void onClickItemShopHome(Shop shop) {
-                GoToShopDetail(shop);
-            }
-
-        });
-        gridViewFoodHome.setAdapter(shopHomeAdapter);
-
+        if(GLOBAL.USER!=null){
+            UserDAO userDAO =new UserDAO(database);
+            List<SaveShopMapping> savedList = userDAO.getSavedShop(GLOBAL.USER.getId());
+            SavedAdapter savedAdapter = new SavedAdapter(this.getContext(), savedList);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+            recyclerViewSaved.setAdapter(savedAdapter);
+            recyclerViewSaved.setVisibility(View.VISIBLE);
+            recyclerViewSaved.setLayoutManager(layoutManager);
+            btnGotoLogin.setVisibility(View.GONE);
+        }
+        else {
+            recyclerViewSaved.setVisibility(View.GONE);
+        }
     }
 
     private void GoToShopDetail(Shop shop) {
         Intent intent = new Intent(this.getContext(), ShopDetailActivity.class);
-        intent.putExtra("Shop",shop);
+        Gson gson = new Gson();
+        String shopJSON = gson.toJson(shop);
+        intent.putExtra("Shop",shopJSON);
         startActivity(intent);
     }
 }

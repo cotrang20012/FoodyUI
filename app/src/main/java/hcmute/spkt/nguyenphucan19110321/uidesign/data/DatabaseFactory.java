@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.SaveShop;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.User;
 
@@ -14,6 +15,7 @@ public class DatabaseFactory {
         database.ExecQuery("DROP TABLE IF EXISTS Users");
         database.ExecQuery("DROP TABLE IF EXISTS Foods");
         database.ExecQuery("DROP TABLE IF EXISTS Shops");
+        database.ExecQuery("DROP TABLE IF EXISTS Saveds");
         database.ExecQuery("CREATE TABLE IF NOT EXISTS Users(id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " name VARCHAR(50),avatar VARCHAR(150), username VARCHAR(30),password VARCHAR(30)," +
                 "address VARCHAR(150), gender VARCHAR(5), phone VARCHAR(14) )");
@@ -23,10 +25,12 @@ public class DatabaseFactory {
         database.ExecQuery("CREATE TABLE IF NOT EXISTS Shops(id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " name VARCHAR(50), description VARCHAR(30),image VARCHAR(150),imagesearch VARCHAR(150)" +
                 ",address VARCHAR(100),type VARCHAR(100),rate FLOAT(16))");
+        database.ExecQuery("CREATE TABLE IF NOT EXISTS Saveds(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "idShop INTEGER, idUser INTEGER)");
         User user = new User(1, "Trần Duy", "", "tranduy", "12345678", "An Giang", "Nam", "0398110398");
         user.InsertToDatabase(database);
-
-
+        SaveShop saveShop = new SaveShop(1,1,1);
+        saveShop.InsertToDatabase(database);
     }
 
     public static final void MakeDataFood(Database db) {

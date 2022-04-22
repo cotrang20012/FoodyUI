@@ -28,10 +28,11 @@
         <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/fragment_list.xml" value="0.13903985507246377" />
         <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/fragment_notify.xml" value="0.18614130434782608" />
         <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
-        <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/fragment_saved_shop.xml" value="0.18614130434782608" />
+        <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/fragment_saved_shop.xml" value="0.5" />
         <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/item.xml" value="0.33" />
         <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/item_food_home.xml" value="0.33" />
         <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/item_food_most.xml" value="0.184375" />
+        <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/item_saved_shop.xml" value="0.2" />
         <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/item_search_food.xml" value="0.33" />
         <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/item_search_shop.xml" value="0.2" />
         <entry key="..\:/HT/hk6/LTDD/FoodyUI/app/src/main/res/layout/item_shop_home.xml" value="0.33" />

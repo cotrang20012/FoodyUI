@@ -2,7 +2,11 @@ package hcmute.spkt.nguyenphucan19110321.uidesign.model.DAO;
 
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
+import hcmute.spkt.nguyenphucan19110321.uidesign.mapping.SaveShopMapping;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.User;
 
 public class UserDAO {
@@ -29,5 +33,23 @@ public class UserDAO {
             return new User(id,name,avatar,username,password,address,type,phone);
         }
         return null;
+    }
+
+    public List<SaveShopMapping> getSavedShop(int idUser){
+        List<SaveShopMapping> savedShop = new ArrayList<>();
+        Cursor cursor = database.SelectData("select Saveds.id as id, Shops.id as idShop, Shops.name as name," +
+                "Shops.imageSearch as image, Shops.address as address, Shops.type as type,Shops.rate as rate  " +
+                "from Saveds inner join Shops on Saveds.idShop=Shops.id  where idUser="+String.valueOf(idUser));
+        while(cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            int idShop = cursor.getInt(1);
+            String nameShop = cursor.getString(2);
+            String image = cursor.getString(3);
+            String address = cursor.getString(4);
+            String type =cursor.getString(5);
+            double rate=cursor.getDouble(6);
+            savedShop.add(new SaveShopMapping(id,idShop,idUser,nameShop,image,address,type,rate));
+        }
+        return savedShop;
     }
 }

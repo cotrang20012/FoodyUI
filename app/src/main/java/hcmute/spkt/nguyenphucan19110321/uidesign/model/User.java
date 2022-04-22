@@ -109,4 +109,6 @@ public class User {
         params[7] = this.phone;
         db.ExecQuery("insert into Users values(?,?,?,?,?,?,?,?)", params);
     }
+
+
 }
