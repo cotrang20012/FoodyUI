@@ -17,6 +17,15 @@ public class User {
     private String address;
     private String gender;
     private String phone;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public int getId() {
         return id;
@@ -85,8 +94,13 @@ public class User {
         this.username=username;
         this.password=password;
     }
+    public User(String username, String password,String name){
+        this.username=username;
+        this.password=password;
+        this.name=name;
+    }
 
-    public User(int id, String name,String avatar,String username,String password,String address,String gender,String phone){
+    public User(int id, String name,String avatar,String username,String password,String address,String gender,String phone,String email){
         this.id=id;
         this.name=name;
         this.avatar=avatar;
@@ -95,10 +109,11 @@ public class User {
         this.address=address;
         this.gender=gender;
         this.phone=phone;
+        this.email=email;
     }
 
     public void InsertToDatabase(Database db) {
-        String[] params = new String[8];
+        String[] params = new String[9];
         params[0] = String.valueOf(this.id);
         params[1] = this.name;
         params[2] = this.avatar;
@@ -107,7 +122,8 @@ public class User {
         params[5] = this.address;
         params[6] = this.gender;
         params[7] = this.phone;
-        db.ExecQuery("insert into Users values(?,?,?,?,?,?,?,?)", params);
+        params[8] =this.email;
+        db.ExecQuery("insert into Users values(?,?,?,?,?,?,?,?,?)", params);
     }
 
 

@@ -70,6 +70,9 @@ public class ShopDetailActivity extends AppCompatActivity {
                     btnSaveShop.setCompoundDrawables(img, null, null, null);
                     btnSaveShop.setTag(true);
                 }
+                else{
+                    btnSaveShop.setTag(true);
+                }
             }
         }
 

@@ -30,7 +30,8 @@ public class UserDAO {
             String address=cursor.getString(5);
             String type = cursor.getString(6);
             String phone =cursor.getString(7);
-            return new User(id,name,avatar,username,password,address,type,phone);
+            String email =cursor.getString(8);
+            return new User(id,name,avatar,username,password,address,type,phone,email);
         }
         return null;
     }

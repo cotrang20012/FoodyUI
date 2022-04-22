@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Database database = new Database(this,"Foody.sqlite",null,1);
+
         DatabaseFactory.CreateDatabase(database);
         DatabaseFactory.MakeData(database);
         DatabaseFactory.MakeDataFood(database); bottomNavigation = findViewById(R.id.bottom_navigation);
