@@ -1,12 +1,22 @@
 package hcmute.spkt.nguyenphucan19110321.uidesign.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Order implements Serializable {
     protected int id;
-    protected String name;
-    protected int number;
+    protected int idUser;
+    protected String nameShop;
+    protected Date time;
     protected int price;
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
 
     public int getId() {
         return id;
@@ -16,20 +26,20 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameShop() {
+        return nameShop;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameShop(String nameShop) {
+        this.nameShop = nameShop;
     }
 
-    public int getNumber() {
-        return number;
+    public Date getTime() {
+        return time;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public int getPrice() {
@@ -39,13 +49,15 @@ public class Order implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
+
     public Order(){
 
     }
-    public Order(int id, String name, int number, int price) {
+    public Order(int id,int idUser, String nameShop, Date time, int price) {
         this.id = id;
-        this.name = name;
-        this.number = number;
+        this.idUser=idUser;
+        this.nameShop = nameShop;
+        this.time = time;
         this.price = price;
     }
 }

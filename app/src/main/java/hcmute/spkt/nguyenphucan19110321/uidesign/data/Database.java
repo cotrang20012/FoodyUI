@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
@@ -22,9 +23,9 @@ public class Database extends SQLiteOpenHelper {
 
 
     public static final void MakeDataOrder(){
-        Order order1 = new Order(1,"Chân gà xé",2,53000);
-        Order order2 = new Order(2,"Chân gà nướng",3,60000);
-        Order order3 = new Order(3,"Chân gà xé",1,70000);
+        Order order1 = new Order(1,1,"Gogi House - Quán Nướng Hàn Quốc - Saigon Centre",new Date(),53000);
+        Order order2 = new Order(2,1,"Bánh Mì Tuấn Mập - Nguyễn Thị Nhỏ",new Date(),60000);
+        Order order3 = new Order(3,1,"Pergola - Cafe Nhà Hàng Sân Vườn",new Date(),70000);
         ORDER_LIST.add(order1);
         ORDER_LIST.add(order3);
         ORDER_LIST.add(order2);

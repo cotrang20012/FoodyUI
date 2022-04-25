@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -16,8 +18,12 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.NotifyFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.DAO.UserDAO;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.User;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.AccountFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.HomeFragment;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.InvoiceFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.ListFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.SavedFragment;
 
@@ -34,10 +40,6 @@ public class MainActivity extends AppCompatActivity {
                    selectedFragment = new HomeFragment();
                     break;
                 }
-                case R.id.miList: {
-                    selectedFragment = new ListFragment();
-                    break;
-                }
                 case R.id.miAccount: {
                     selectedFragment = new AccountFragment();
                     break;
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case R.id.miNotification: {
                     selectedFragment = new NotifyFragment();
+                    break;
+                }
+                case R.id.miInvoice: {
+                    selectedFragment = new InvoiceFragment();
                     break;
                 }
                 default:
@@ -64,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Database database = new Database(this,"Foody.sqlite",null,1);
-
+        database = new Database(this,"Foody.sqlite",null,1);
         DatabaseFactory.CreateDatabase(database);
         DatabaseFactory.MakeData(database);
         DatabaseFactory.MakeDataFood(database); bottomNavigation = findViewById(R.id.bottom_navigation);
         setEventNavigation();
+        LoadUserFromSharePreference();
     }
 
     protected  void setEventNavigation(){
@@ -80,6 +86,20 @@ public class MainActivity extends AppCompatActivity {
     public void onCickSearchBar(View view) {
         Intent intent = new Intent(this,SearchActivity.class);
         startActivity(intent);
+    }
+
+    private void LoadUserFromSharePreference(){
+        SharedPreferences pref = getSharedPreferences("USER",MODE_PRIVATE);
+        String username = pref.getString("username","");
+        String password =pref.getString("password","");
+        if(!(username.equals("") || password.equals(""))){
+            User user =new User(username,password);
+            UserDAO userDAO = new UserDAO(database);
+            User userLogin = userDAO.CheckLogin(user);
+            if(userLogin!=null){
+                GLOBAL.USER = userLogin;
+            }
+        }
     }
 
 }

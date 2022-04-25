@@ -33,9 +33,9 @@ public class FoodPaymentAdapter extends RecyclerView.Adapter<FoodPaymentHolder>{
     @Override
     public void onBindViewHolder(@NonNull FoodPaymentHolder holder, int position) {
         Order order = orderList.get(position);
-        String TotalPrice = String.valueOf(order.getPrice()*order.getNumber());
+ //       String TotalPrice = String.valueOf(order.getPrice()*order.getNumber());
         String Price = String.valueOf(order.getPrice());
-        String Number = String.valueOf(order.getNumber());
+//        String Number = String.valueOf(order.getNumber());
 //        holder.tvFoodNamePayment.setText(order.getName());
 //        holder.tvNoFPayment.setText(Number);
 //        holder.tvFoodPrice.setText(TotalPrice);

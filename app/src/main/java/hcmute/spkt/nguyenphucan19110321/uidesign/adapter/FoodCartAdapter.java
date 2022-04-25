@@ -35,12 +35,12 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartHolder> {
     @Override
     public void onBindViewHolder(@NonNull FoodCartHolder holder, int position) {
         Order order = orderList.get(position);
-        String TotalPrice = String.valueOf(order.getPrice()*order.getNumber());
-        String Price = String.valueOf(order.getPrice());
-        String Number = String.valueOf(order.getNumber());
-        holder.tvFoodNameCart.setText(order.getName());
-        holder.tvNumberofFood.setText(Number);
-        holder.tvTotal.setText(Price+"đ x "+Number+" = "+TotalPrice+"đ");
+//        String TotalPrice = String.valueOf(order.getPrice()*order.getNumber());
+//        String Price = String.valueOf(order.getPrice());
+//        String Number = String.valueOf(order.getNumber());
+//        holder.tvFoodNameCart.setText(order.getName());
+//        holder.tvNumberofFood.setText(Number);
+//        holder.tvTotal.setText(Price+"đ x "+Number+" = "+TotalPrice+"đ");
     }
 
     @Override
