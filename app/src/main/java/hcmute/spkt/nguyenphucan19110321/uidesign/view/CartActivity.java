@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -23,22 +24,27 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodCartAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 
 public class CartActivity extends AppCompatActivity {
     private TextView tvTotal;
     private TextView tvNameCart;
     private ImageView imgProfileCart;
-    List<Order> orderList = new ArrayList<>();
+    private Order order;
+    private List<OrderDetails> orderDetailsList;
     RecyclerView recyclerViewCart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        Intent intent = getIntent();
+        order = (Order) intent.getSerializableExtra("order");
+        orderDetailsList = (List<OrderDetails>) intent.getSerializableExtra("orderdetailslist");
         SetControls();
         SetTexts();
         LoadListOrder();
-
     }
 
     private void SetControls(){
@@ -48,9 +54,9 @@ public class CartActivity extends AppCompatActivity {
         recyclerViewCart = findViewById(R.id.recyclerViewCart);
     }
     private void SetTexts(){
-        SpannableString s1 = new SpannableString("2 ");
+        SpannableString s1 = new SpannableString(String.valueOf(order.getTotalNumber()));
         SpannableString s2 = new SpannableString("phần - ");
-        SpannableString s3 = new SpannableString("108,000đ");
+        SpannableString s3 = new SpannableString(String.valueOf(order.getPrice()));
 
         int flag = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
         s1.setSpan(new StyleSpan(Typeface.BOLD), 0, s1.length(), flag);
@@ -69,10 +75,10 @@ public class CartActivity extends AppCompatActivity {
         if(Database.ORDER_LIST.size()==0){
             Database.MakeDataOrder();
         }
-        FoodCartAdapter foodCartAdapter =new FoodCartAdapter(this, Database.ORDER_LIST);
+        FoodCartAdapter foodCartAdapter =new FoodCartAdapter(this, order,orderDetailsList);
         LinearLayoutManager linear =new LinearLayoutManager(this);
-
         recyclerViewCart.setAdapter(foodCartAdapter);
         recyclerViewCart.setLayoutManager(linear);
+
     }
 }

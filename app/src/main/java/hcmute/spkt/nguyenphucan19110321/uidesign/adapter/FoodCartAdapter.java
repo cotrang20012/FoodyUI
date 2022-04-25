@@ -2,6 +2,7 @@ package hcmute.spkt.nguyenphucan19110321.uidesign.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,35 +17,69 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodCartHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 
 public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartHolder> {
     private Context context;
-    private List<Order> orderList;
+    private Order order;
+    private List<OrderDetails> orderDetailsList;
 
-    public FoodCartAdapter(Context context, List<Order> orderList) {
+    public FoodCartAdapter(Context context, Order order, List<OrderDetails> orderDetailsList) {
         this.context = context;
-        this.orderList = orderList;
+        this.order = order;
+        this.orderDetailsList = orderDetailsList;
     }
 
     @NonNull
     @Override
     public FoodCartHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       return new FoodCartHolder(LayoutInflater.from(context).inflate(R.layout.item_food_cart,parent,false));
+        return new FoodCartHolder(LayoutInflater.from(context).inflate(R.layout.item_food_cart, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull FoodCartHolder holder, int position) {
-        Order order = orderList.get(position);
-//        String TotalPrice = String.valueOf(order.getPrice()*order.getNumber());
-//        String Price = String.valueOf(order.getPrice());
-//        String Number = String.valueOf(order.getNumber());
-//        holder.tvFoodNameCart.setText(order.getName());
-//        holder.tvNumberofFood.setText(Number);
-//        holder.tvTotal.setText(Price+"đ x "+Number+" = "+TotalPrice+"đ");
+        OrderDetails orderDetails = orderDetailsList.get(position);
+        String TotalPrice = String.valueOf(orderDetails.getPrice() * orderDetails.getNumber());
+        String Price = String.valueOf(orderDetails.getPrice());
+        String Number = String.valueOf(orderDetails.getNumber());
+        holder.tvFoodNameCart.setText(orderDetails.getFoodName());
+        holder.tvNumberofFood.setText(Number);
+        holder.tvTotal.setText(Price + "đ x " + Number + " = " + TotalPrice + "đ");
+
+        holder.btnDecrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(orderDetails.getNumber()>1){
+                    orderDetails.setNumber(orderDetails.getNumber() - 1);
+                    String TotalPrice = String.valueOf(orderDetails.getPrice() * orderDetails.getNumber());
+                    String Price = String.valueOf(orderDetails.getPrice());
+                    String Number = String.valueOf(orderDetails.getNumber());
+                    holder.tvFoodNameCart.setText(orderDetails.getFoodName());
+                    holder.tvNumberofFood.setText(Number);
+                    holder.tvTotal.setText(Price + "đ x " + Number + " = " + TotalPrice + "đ");
+                    notifyDataSetChanged();
+                }
+            }
+        });
+
+        holder.btnIncrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                orderDetails.setNumber(orderDetails.getNumber() + 1);
+                String TotalPrice = String.valueOf(orderDetails.getPrice() * orderDetails.getNumber());
+                String Price = String.valueOf(orderDetails.getPrice());
+                String Number = String.valueOf(orderDetails.getNumber());
+                holder.tvFoodNameCart.setText(orderDetails.getFoodName());
+                holder.tvNumberofFood.setText(Number);
+                holder.tvTotal.setText(Price + "đ x " + Number + " = " + TotalPrice + "đ");
+                notifyDataSetChanged();
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return orderList.size();
+        return orderDetailsList.size();
     }
 }
