@@ -126,5 +126,15 @@ public class User {
         db.ExecQuery("insert into Users values(?,?,?,?,?,?,?,?,?)", params);
     }
 
+    public void UpdateProfile(Database db) {
+        String[] params = new String[5];
+        params[0] = this.name;
+        params[1] = this.address;
+        params[2] = this.gender;
+        params[3] = this.phone;
+        params[4] = String.valueOf(this.id);
+        db.ExecQuery("Update Users set name=?,address=?,gender=?,phone=? where id=?", params);
+    }
+
 
 }

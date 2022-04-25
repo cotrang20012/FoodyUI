@@ -9,12 +9,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import hcmute.spkt.nguyenphucan19110321.uidesign.NotifyFragment;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.NotifyFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
@@ -24,7 +23,6 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.model.User;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.AccountFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.HomeFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.InvoiceFragment;
-import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.ListFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment.SavedFragment;
 
 public class MainActivity extends AppCompatActivity {

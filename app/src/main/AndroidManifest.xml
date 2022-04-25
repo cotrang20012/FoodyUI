@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UIDesign">
         <activity
-            android:name=".ProfileActivity"
+            android:name=".view.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".view.PaymentActivity"

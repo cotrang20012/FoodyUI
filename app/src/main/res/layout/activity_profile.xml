@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".view.ProfileActivity">
 
 <LinearLayout
     android:id="@+id/layoutTopProfile"
@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#00ffffff"
+        android:background="#00ffffff"
         app:icon="@drawable/ic_baseline_arrow_back_ios_24" />
 </LinearLayout>
     <LinearLayout
@@ -76,8 +77,8 @@
             android:textSize="24dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvAddressProfile"
+        <EditText
+            android:id="@+id/txtAddressProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -96,16 +97,27 @@
 
             android:textSize="24dp"
             android:textStyle="bold" />
+<RadioGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <RadioButton
+        android:id="@+id/rbNam"
+        android:checked="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nam"
+        />
+    <RadioButton
+        android:id="@+id/rbNu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="Nữ"
+        />
 
-        <TextView
-            android:id="@+id/txtGenderProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:text="Nam"
-            android:textSize="18dp" />
+</RadioGroup>
 
         <TextView
             android:id="@+id/textView4"
@@ -117,7 +129,7 @@
             android:textSize="24dp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/txtPhoneProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,6 +140,7 @@
             android:textSize="18dp" />
 
         <Button
+            android:id="@+id/btnEditProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

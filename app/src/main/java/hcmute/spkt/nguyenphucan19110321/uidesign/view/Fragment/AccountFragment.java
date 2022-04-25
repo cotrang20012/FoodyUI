@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import hcmute.spkt.nguyenphucan19110321.uidesign.ProfileActivity;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.ProfileActivity;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.LoginActivity;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;

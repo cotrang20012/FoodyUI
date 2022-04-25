@@ -1,4 +1,4 @@
-package hcmute.spkt.nguyenphucan19110321.uidesign;
+package hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment;
 
 import android.os.Bundle;
 
@@ -15,6 +15,7 @@ import android.widget.Button;
 
 import java.util.List;
 
+import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.NotifyAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
