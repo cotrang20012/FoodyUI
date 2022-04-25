@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
@@ -29,6 +30,7 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.DAO.SaveShopDAO;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.Notify;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.SaveShop;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
@@ -90,6 +92,8 @@ public class ShopDetailActivity extends AppCompatActivity {
                         img.setBounds(0, 0, 60, 60);
                         btnSaveShop.setCompoundDrawables(img, null, null, null);
                         btnSaveShop.setTag(false);
+                        Notify notify = new Notify(GLOBAL.USER.getId(),"Lưu shop","Bạn đã lưu shop "+shop.getName(),new Date());
+                        notify.InsertToDatabase(database);
                     }
                     else {
                         SaveShop saveShop = new SaveShop(shop.getId(),GLOBAL.USER.getId());
@@ -98,6 +102,8 @@ public class ShopDetailActivity extends AppCompatActivity {
                         img.setBounds(0, 0, 60, 60);
                         btnSaveShop.setCompoundDrawables(img, null, null, null);
                         btnSaveShop.setTag(true);
+                        Notify notify = new Notify(GLOBAL.USER.getId(),"Huỷ lưu shop","Bạn đã huỷ lưu shop "+shop.getName(),new Date());
+                        notify.InsertToDatabase(database);
                     }
                 }
                 else {

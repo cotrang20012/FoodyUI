@@ -12,6 +12,7 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import hcmute.spkt.nguyenphucan19110321.uidesign.NotifyFragment;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case R.id.miBookmark: {
                     selectedFragment = new SavedFragment();
+                    break;
+                }
+                case R.id.miNotification: {
+                    selectedFragment = new NotifyFragment();
                     break;
                 }
                 default:

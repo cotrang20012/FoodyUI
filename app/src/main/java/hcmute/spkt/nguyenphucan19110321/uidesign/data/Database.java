@@ -57,6 +57,7 @@ public class Database extends SQLiteOpenHelper {
         database.execSQL("DROP TABLE IF EXISTS Foods");
         database.execSQL("DROP TABLE IF EXISTS Shops");
         database.execSQL("DROP TABLE IF EXISTS Saveds");
+        database.execSQL("DROP TABLE IF EXISTS Notifies");
         database.execSQL("CREATE TABLE IF NOT EXISTS Users(id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " name VARCHAR(50),avatar VARCHAR(150), username VARCHAR(30),password VARCHAR(30)," +
                 "address VARCHAR(150), gender VARCHAR(5), phone VARCHAR(14),email VARCHAR(44) )");
@@ -68,6 +69,8 @@ public class Database extends SQLiteOpenHelper {
                 ",address VARCHAR(100),type VARCHAR(100),rate FLOAT(16))");
         database.execSQL("CREATE TABLE IF NOT EXISTS Saveds(id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "idShop INTEGER, idUser INTEGER)");
+        database.execSQL("CREATE TABLE IF NOT EXISTS Notifies(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "idUser INTEGER,title VARCHAR(100), description VARCHAR(250),time Long)");
         database.execSQL("insert into Users values(1,'Trần Duy','','tranduy','12345678','AG','Nam','0398110398','tranduy@gmail.com')");
         SaveShop saveShop = new SaveShop(1,1,1);
         database.execSQL("insert into Saveds values(1,1,1)");
