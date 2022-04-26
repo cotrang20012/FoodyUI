@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +17,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.CartActivity;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
+import hcmute.spkt.nguyenphucan19110321.uidesign.view.ShopDetailActivity;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
 
@@ -52,22 +55,28 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
         holder.btnAddFoodToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int flag = 0;
-                for(OrderDetails order : orderDetailsList){
-                    if(order.getFoodID() == food.getId()){
-                        flag = 1;
-                        order.setNumber(order.getNumber()+1);
+                if(GLOBAL.USER != null){
+                    order.setIdUser(GLOBAL.USER.getId());
+                    int flag = 0;
+                    for(OrderDetails order : orderDetailsList){
+                        if(order.getFoodID() == food.getId()){
+                            flag = 1;
+                            order.setNumber(order.getNumber()+1);
+                        }
                     }
-                }
-                if(flag==0){
-                    OrderDetails orderDetails = new OrderDetails(1,order.getId(),food.getId(),food.getName(),1,food.getPrice());
-                    orderDetailsList.add(orderDetails);
+                    if(flag==0){
+                        OrderDetails orderDetails = new OrderDetails(1,order.getId(),food.getId(),food.getName(),1,food.getPrice());
+                        orderDetailsList.add(orderDetails);
 
-                    Intent intent = new Intent(context, CartActivity.class);
-                    intent.putExtra("order",order);
-                    intent.putExtra("orderdetailslist",(Serializable) orderDetailsList);
-                    context.startActivity(intent);
+                        Intent intent = new Intent(context, CartActivity.class);
+                        intent.putExtra("order",order);
+                        intent.putExtra("orderdetailslist",(Serializable) orderDetailsList);
+                        context.startActivity(intent);
+                    }
+                } else{
+                    Toast.makeText(context,"Bạn phải đăng nhập để thực hiện tính năng này",Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
     }

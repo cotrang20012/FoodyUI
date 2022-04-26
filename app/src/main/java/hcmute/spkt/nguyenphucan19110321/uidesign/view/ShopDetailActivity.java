@@ -63,7 +63,7 @@ public class ShopDetailActivity extends AppCompatActivity {
             tvAddressShopDetail.setText(shop.getAddress());
             Picasso.get().load(shop.getImage()).into(imgShopDetail);
             Date time = new Date();
-            order = new Order(1,GLOBAL.USER.getId(),shop.getName(),time,0,0);
+            order = new Order(1,1,shop.getName(),time,0,0);
 
             if(GLOBAL.USER!=null){
                 SaveShopDAO saveShopDAO = new SaveShopDAO(database);
