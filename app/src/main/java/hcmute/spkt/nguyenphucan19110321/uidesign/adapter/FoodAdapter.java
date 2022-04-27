@@ -6,12 +6,16 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -58,16 +62,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
                 if(GLOBAL.USER != null){
                     order.setIdUser(GLOBAL.USER.getId());
                     int flag = 0;
-                    for(OrderDetails order : orderDetailsList){
-                        if(order.getFoodID() == food.getId()){
+                    for(OrderDetails orders : orderDetailsList){
+                        if(orders.getFoodID() == food.getId()){
                             flag = 1;
-                            order.setNumber(order.getNumber()+1);
+                            orders.setNumber(orders.getNumber()+1);
+                            order.setTotalNumber(order.getTotalNumber()+1);
                         }
                     }
                     if(flag==0){
                         OrderDetails orderDetails = new OrderDetails(1,order.getId(),food.getId(),food.getName(),1,food.getPrice());
                         orderDetailsList.add(orderDetails);
-
+                        order.setTotalNumber(order.getTotalNumber()+1);
                         Intent intent = new Intent(context, CartActivity.class);
                         intent.putExtra("order",order);
                         intent.putExtra("orderdetailslist",(Serializable) orderDetailsList);

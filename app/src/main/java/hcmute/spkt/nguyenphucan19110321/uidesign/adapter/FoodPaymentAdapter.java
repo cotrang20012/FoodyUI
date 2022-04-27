@@ -14,14 +14,18 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodCartHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodPaymentHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 
 public class FoodPaymentAdapter extends RecyclerView.Adapter<FoodPaymentHolder>{
     Context context;
-    List<Order> orderList;
 
-    public FoodPaymentAdapter(Context context, List<Order> orderList) {
+    Order order;
+    List<OrderDetails> orderDetailsList;
+
+    public FoodPaymentAdapter(Context context, Order order,List<OrderDetails> orderDetailsList) {
         this.context = context;
-        this.orderList = orderList;
+        this.order = order;
+        this.orderDetailsList = orderDetailsList;
     }
 
     @NonNull
@@ -32,7 +36,7 @@ public class FoodPaymentAdapter extends RecyclerView.Adapter<FoodPaymentHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull FoodPaymentHolder holder, int position) {
-        Order order = orderList.get(position);
+        OrderDetails orderDetails = orderDetailsList.get(position);
  //       String TotalPrice = String.valueOf(order.getPrice()*order.getNumber());
         String Price = String.valueOf(order.getPrice());
 //        String Number = String.valueOf(order.getNumber());
@@ -45,6 +49,6 @@ public class FoodPaymentAdapter extends RecyclerView.Adapter<FoodPaymentHolder>{
 
     @Override
     public int getItemCount() {
-        return orderList.size();
+        return orderDetailsList.size();
     }
 }

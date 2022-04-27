@@ -13,9 +13,12 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +26,16 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodCartAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
+import hcmute.spkt.nguyenphucan19110321.uidesign.event.IChangeNumberOfFoodCart;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements IChangeNumberOfFoodCart {
     private TextView tvTotal;
-    private TextView tvNameCart;
+    private TextView tvNameCart,tvDelete;
     private ImageView imgProfileCart;
+    private Button btnContinue,btnCancle;
     private Order order;
     private List<OrderDetails> orderDetailsList;
     RecyclerView recyclerViewCart;
@@ -43,8 +49,23 @@ public class CartActivity extends AppCompatActivity {
         order = (Order) intent.getSerializableExtra("order");
         orderDetailsList = (List<OrderDetails>) intent.getSerializableExtra("orderdetailslist");
         SetControls();
+        SetEvents();
         SetTexts();
         LoadListOrder();
+
+        tvNameCart.setText(GLOBAL.USER.getName());
+    }
+
+    private void SetEvents() {
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CartActivity.this,PaymentActivity.class);
+                intent.putExtra("order",order);
+                intent.putExtra("orderdetails", (Serializable) orderDetailsList);
+                startActivity(intent);
+            }
+        });
     }
 
     private void SetControls(){
@@ -52,10 +73,15 @@ public class CartActivity extends AppCompatActivity {
         tvNameCart = findViewById(R.id.tvNameCart);
         imgProfileCart = findViewById(R.id.imgProfileCart);
         recyclerViewCart = findViewById(R.id.recyclerViewCart);
+        tvNameCart = findViewById(R.id.tvNameCart);
+        tvDelete = findViewById(R.id.tvDelete);
+        btnContinue = findViewById(R.id.btnContinue);
+        btnCancle = findViewById(R.id.btnCancel);
+
     }
     private void SetTexts(){
         SpannableString s1 = new SpannableString(String.valueOf(order.getTotalNumber()));
-        SpannableString s2 = new SpannableString("phần - ");
+        SpannableString s2 = new SpannableString(" phần - ");
         SpannableString s3 = new SpannableString(String.valueOf(order.getPrice()));
 
         int flag = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
@@ -80,5 +106,10 @@ public class CartActivity extends AppCompatActivity {
         recyclerViewCart.setAdapter(foodCartAdapter);
         recyclerViewCart.setLayoutManager(linear);
 
+    }
+
+    @Override
+    public void OnChangeNumberOfFood() {
+        SetTexts();
     }
 }
