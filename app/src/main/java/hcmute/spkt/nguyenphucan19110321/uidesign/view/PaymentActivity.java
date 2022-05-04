@@ -19,6 +19,7 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodCartAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodPaymentAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 import lombok.Data;
@@ -28,8 +29,7 @@ public class PaymentActivity extends AppCompatActivity {
     Button btnPayment;
     ImageView imgProfilePayment;
     RecyclerView recyclerViewCartPayment;
-    Order order;
-    List<OrderDetails> orderDetailsList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,6 @@ public class PaymentActivity extends AppCompatActivity {
         SetControls();
 
         Intent intent = getIntent();
-        order = (Order) intent.getSerializableExtra("order");
-        orderDetailsList = (List<OrderDetails>) intent.getSerializableExtra("orderdetails");
 
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +45,6 @@ public class PaymentActivity extends AppCompatActivity {
                 String SQL = "";
                 Database database  =new Database(PaymentActivity.this,"Foody.sqlite",null,1);
                 database.ExecQuery(SQL);
-
             }
         });
 
@@ -70,7 +67,7 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     private void LoadListOrder(){
-        FoodPaymentAdapter foodCartAdapter =new FoodPaymentAdapter(this, order,orderDetailsList);
+        FoodPaymentAdapter foodCartAdapter =new FoodPaymentAdapter(this, GLOBAL.ORDER,GLOBAL.ORDERDETAILS);
         LinearLayoutManager linear =new LinearLayoutManager(this);
 
         recyclerViewCartPayment.setAdapter(foodCartAdapter);

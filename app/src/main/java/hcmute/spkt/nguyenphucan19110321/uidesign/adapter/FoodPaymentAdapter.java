@@ -18,7 +18,6 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 
 public class FoodPaymentAdapter extends RecyclerView.Adapter<FoodPaymentHolder>{
     Context context;
-
     Order order;
     List<OrderDetails> orderDetailsList;
 

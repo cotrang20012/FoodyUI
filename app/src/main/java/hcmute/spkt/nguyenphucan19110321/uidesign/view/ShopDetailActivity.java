@@ -44,8 +44,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     private ImageView imgShopDetail;
     private Button btnSaveShop,btnCart;
     Database database;
-    protected Order order;
-    protected List<OrderDetails> orderDetailsList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +68,8 @@ public class ShopDetailActivity extends AppCompatActivity {
 
 
             if(GLOBAL.USER!=null){
-                order = new Order(1,GLOBAL.USER.getId(),shop.getName(),time,0,0);
+                GLOBAL.ORDER = new Order(1,GLOBAL.USER.getId(),shop.getName(),time,0,0);
+                GLOBAL.ORDERDETAILS = new ArrayList<>();
                 SaveShopDAO saveShopDAO = new SaveShopDAO(database);
                 boolean saved = saveShopDAO.existSaved(shop.getId(),GLOBAL.USER.getId());
                 if(saved){
@@ -83,8 +83,8 @@ public class ShopDetailActivity extends AppCompatActivity {
                 }
             }
         }
-
     }
+
     private void SetEvent(){
         btnSaveShop.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
@@ -127,8 +127,6 @@ public class ShopDetailActivity extends AppCompatActivity {
 
     private void GotoCart(){
         Intent intent = new Intent(this, CartActivity.class);
-        intent.putExtra("order",order);
-        intent.putExtra("orderdetailslist",(Serializable) orderDetailsList);
         startActivity(intent);
     }
 
@@ -152,24 +150,28 @@ public class ShopDetailActivity extends AppCompatActivity {
             @Override
             public void AddToCart(Food food) {
                 if(GLOBAL.USER != null){
-                    if(order ==null){
-                        order = new Order(1,GLOBAL.USER.getId(),shop.getName(),new Date(),0,0);
+                    if(GLOBAL.ORDER ==null){
+                        GLOBAL.ORDER = new Order(1,GLOBAL.USER.getId(),shop.getName(),new Date(),0,0);
+                        GLOBAL.ORDERDETAILS.clear();
+                        GLOBAL.ORDERDETAILS = new ArrayList<>();
                     }
-                    order.setIdUser(GLOBAL.USER.getId());
                     int flag = 0;
-                    for(OrderDetails orders : orderDetailsList){
+                    for(OrderDetails orders : GLOBAL.ORDERDETAILS){
                         if(orders.getFoodID() == food.getId()){
                             flag = 1;
                             orders.setNumber(orders.getNumber()+1);
-                            order.setTotalNumber(order.getTotalNumber()+1);
+                            GLOBAL.ORDER.setTotalNumber(GLOBAL.ORDER.getTotalNumber()+1);
+                            GLOBAL.ORDER.setPrice(GLOBAL.ORDER.getPrice()+orders.getPrice());
                         }
                     }
                     if(flag==0){
-                        OrderDetails orderDetails = new OrderDetails(1,order.getId(),food.getId(),food.getName(),1,food.getPrice());
-                        orderDetailsList.add(orderDetails);
-                        order.setTotalNumber(order.getTotalNumber()+1);
+                        OrderDetails orderDetails = new OrderDetails(1,GLOBAL.ORDER.getId(),food.getId(),food.getName(),1,food.getPrice());
+                        GLOBAL.ORDERDETAILS.add(orderDetails);
+                        GLOBAL.ORDER.setTotalNumber(GLOBAL.ORDER.getTotalNumber()+1);
+                        GLOBAL.ORDER.setPrice(GLOBAL.ORDER.getPrice()+orderDetails.getPrice());
                     }
-btnCart.setVisibility(View.VISIBLE);
+                    btnCart.setVisibility(View.VISIBLE);
+                    btnCart.setText("GIỎ HÀNG");
                 } else{
                     Toast.makeText(getApplicationContext(),"Bạn phải đăng nhập để thực hiện tính năng này",Toast.LENGTH_SHORT).show();
                 }
@@ -180,4 +182,10 @@ btnCart.setVisibility(View.VISIBLE);
         recycleViewFoodMost.setLayoutManager(linear);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        GLOBAL.ORDER = null;
+        GLOBAL.ORDERDETAILS.clear();
+    }
 }

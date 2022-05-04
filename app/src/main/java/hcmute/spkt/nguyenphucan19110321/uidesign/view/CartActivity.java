@@ -36,8 +36,6 @@ public class CartActivity extends AppCompatActivity implements IChangeNumberOfFo
     private TextView tvNameCart,tvDelete;
     private ImageView imgProfileCart;
     private Button btnContinue,btnCancle;
-    private Order order;
-    private List<OrderDetails> orderDetailsList;
     RecyclerView recyclerViewCart;
 
 
@@ -45,9 +43,6 @@ public class CartActivity extends AppCompatActivity implements IChangeNumberOfFo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        Intent intent = getIntent();
-        order = (Order) intent.getSerializableExtra("order");
-        orderDetailsList = (List<OrderDetails>) intent.getSerializableExtra("orderdetailslist");
         SetControls();
         SetEvents();
         SetTexts();
@@ -61,8 +56,6 @@ public class CartActivity extends AppCompatActivity implements IChangeNumberOfFo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CartActivity.this,PaymentActivity.class);
-                intent.putExtra("order",order);
-                intent.putExtra("orderdetails", (Serializable) orderDetailsList);
                 startActivity(intent);
             }
         });
@@ -80,9 +73,9 @@ public class CartActivity extends AppCompatActivity implements IChangeNumberOfFo
 
     }
     private void SetTexts(){
-        SpannableString s1 = new SpannableString(String.valueOf(order.getTotalNumber()));
+        SpannableString s1 = new SpannableString(String.valueOf(GLOBAL.ORDER.getTotalNumber()));
         SpannableString s2 = new SpannableString(" phần - ");
-        SpannableString s3 = new SpannableString(String.valueOf(order.getPrice()));
+        SpannableString s3 = new SpannableString(String.valueOf(GLOBAL.ORDER.getPrice()));
 
         int flag = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
         s1.setSpan(new StyleSpan(Typeface.BOLD), 0, s1.length(), flag);
@@ -101,11 +94,10 @@ public class CartActivity extends AppCompatActivity implements IChangeNumberOfFo
         if(Database.ORDER_LIST.size()==0){
             Database.MakeDataOrder();
         }
-        FoodCartAdapter foodCartAdapter =new FoodCartAdapter(this, order,orderDetailsList);
+        FoodCartAdapter foodCartAdapter =new FoodCartAdapter(this, GLOBAL.ORDER,GLOBAL.ORDERDETAILS);
         LinearLayoutManager linear =new LinearLayoutManager(this);
         recyclerViewCart.setAdapter(foodCartAdapter);
         recyclerViewCart.setLayoutManager(linear);
-
     }
 
     @Override

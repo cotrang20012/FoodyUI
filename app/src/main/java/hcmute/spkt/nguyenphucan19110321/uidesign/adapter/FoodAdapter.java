@@ -35,14 +35,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
 
     private Context context;
     private List<Food> foodList;
-
     private IAddToCartListener listener;
 
     public FoodAdapter(Context context, List<Food> foodList,IAddToCartListener listener){
         this.context = context;
         this.foodList = foodList;
         this.listener = listener;
-
     }
     @NonNull
     @Override
@@ -61,7 +59,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
             @Override
             public void onClick(View view) {
                 listener.AddToCart(food);
-
             }
         });
     }
@@ -70,8 +67,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
         Intent intent = new Intent(context, CartActivity.class);
         context.startActivity(intent);
     }
-
-
 
     @Override
     public int getItemCount() {

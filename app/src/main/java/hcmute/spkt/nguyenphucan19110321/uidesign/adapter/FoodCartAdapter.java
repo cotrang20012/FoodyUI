@@ -47,12 +47,12 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartHolder> {
         holder.tvFoodNameCart.setText(orderDetails.getFoodName());
         holder.tvNumberofFood.setText(Number);
         holder.tvTotal.setText(Price + "đ x " + Number + " = " + TotalPrice + "đ");
-
         holder.btnDecrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(orderDetails.getNumber()>1){
                     order.setTotalNumber(order.getTotalNumber()-1);
+                    order.setPrice(order.getPrice()-orderDetails.getPrice());
                     ((IChangeNumberOfFoodCart)context).OnChangeNumberOfFood();
                     orderDetails.setNumber(orderDetails.getNumber() - 1);
                     String TotalPrice = String.valueOf(orderDetails.getPrice() * orderDetails.getNumber());
@@ -70,6 +70,7 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartHolder> {
             @Override
             public void onClick(View view) {
                 order.setTotalNumber(order.getTotalNumber()+1);
+                order.setPrice(order.getPrice()+orderDetails.getPrice());
                 ((IChangeNumberOfFoodCart)context).OnChangeNumberOfFood();
                 orderDetails.setNumber(orderDetails.getNumber() + 1);
                 String TotalPrice = String.valueOf(orderDetails.getPrice() * orderDetails.getNumber());
