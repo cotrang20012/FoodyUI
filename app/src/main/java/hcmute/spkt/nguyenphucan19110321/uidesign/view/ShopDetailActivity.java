@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,10 +27,12 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
+import hcmute.spkt.nguyenphucan19110321.uidesign.event.IAddToCartListener;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.DAO.SaveShopDAO;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Notify;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.SaveShop;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Shop;
 
@@ -37,12 +40,12 @@ public class ShopDetailActivity extends AppCompatActivity {
 
     RecyclerView recycleViewFoodMost;
     private Shop shop;
-    List<Food> foodList = new ArrayList<>();
     private TextView tvTitleShopDetail,tvNameShopDetail, tvAddressShopDetail,tvTypeShopDetail,tvRangePriceShopDetail;
     private ImageView imgShopDetail;
-    private Button btnSaveShop;
+    private Button btnSaveShop,btnCart;
     Database database;
     protected Order order;
+    protected List<OrderDetails> orderDetailsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +66,10 @@ public class ShopDetailActivity extends AppCompatActivity {
             tvAddressShopDetail.setText(shop.getAddress());
             Picasso.get().load(shop.getImage()).into(imgShopDetail);
             Date time = new Date();
-            order = new Order(1,1,shop.getName(),time,0,0);
+
 
             if(GLOBAL.USER!=null){
+                order = new Order(1,GLOBAL.USER.getId(),shop.getName(),time,0,0);
                 SaveShopDAO saveShopDAO = new SaveShopDAO(database);
                 boolean saved = saveShopDAO.existSaved(shop.getId(),GLOBAL.USER.getId());
                 if(saved){
@@ -113,6 +117,19 @@ public class ShopDetailActivity extends AppCompatActivity {
                 }
             }
         });
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GotoCart();
+            }
+        });
+    }
+
+    private void GotoCart(){
+        Intent intent = new Intent(this, CartActivity.class);
+        intent.putExtra("order",order);
+        intent.putExtra("orderdetailslist",(Serializable) orderDetailsList);
+        startActivity(intent);
     }
 
     private void SetControl(){
@@ -122,6 +139,7 @@ public class ShopDetailActivity extends AppCompatActivity {
         tvNameShopDetail  =findViewById(R.id.tvNameShopDetail);
         tvAddressShopDetail = findViewById(R.id.tvAddressShopDetail);
         btnSaveShop = findViewById(R.id.btnSaveShop);
+        btnCart=findViewById(R.id.btnCart);
     }
 
     public void onClickBack(View view) {
@@ -130,7 +148,33 @@ public class ShopDetailActivity extends AppCompatActivity {
     }
 
     private void LoadListFood(){
-        FoodAdapter foodAdapter =new FoodAdapter(this, shop.GetFoodInShop(database),order);
+        FoodAdapter foodAdapter =new FoodAdapter(this, shop.GetFoodInShop(database), new IAddToCartListener() {
+            @Override
+            public void AddToCart(Food food) {
+                if(GLOBAL.USER != null){
+                    if(order ==null){
+                        order = new Order(1,GLOBAL.USER.getId(),shop.getName(),new Date(),0,0);
+                    }
+                    order.setIdUser(GLOBAL.USER.getId());
+                    int flag = 0;
+                    for(OrderDetails orders : orderDetailsList){
+                        if(orders.getFoodID() == food.getId()){
+                            flag = 1;
+                            orders.setNumber(orders.getNumber()+1);
+                            order.setTotalNumber(order.getTotalNumber()+1);
+                        }
+                    }
+                    if(flag==0){
+                        OrderDetails orderDetails = new OrderDetails(1,order.getId(),food.getId(),food.getName(),1,food.getPrice());
+                        orderDetailsList.add(orderDetails);
+                        order.setTotalNumber(order.getTotalNumber()+1);
+                    }
+btnCart.setVisibility(View.VISIBLE);
+                } else{
+                    Toast.makeText(getApplicationContext(),"Bạn phải đăng nhập để thực hiện tính năng này",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         LinearLayoutManager linear =new LinearLayoutManager(this);
         recycleViewFoodMost.setAdapter(foodAdapter);
         recycleViewFoodMost.setLayoutManager(linear);

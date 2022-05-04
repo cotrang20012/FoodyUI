@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
+import hcmute.spkt.nguyenphucan19110321.uidesign.event.IAddToCartListener;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.CartActivity;
@@ -34,13 +35,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
 
     private Context context;
     private List<Food> foodList;
-    protected Order order;
-    protected List<OrderDetails> orderDetailsList = new ArrayList<>();
 
-    public FoodAdapter(Context context,List<Food> foodList, Order order){
+    private IAddToCartListener listener;
+
+    public FoodAdapter(Context context, List<Food> foodList,IAddToCartListener listener){
         this.context = context;
         this.foodList = foodList;
-        this.order = order;
+        this.listener = listener;
 
     }
     @NonNull
@@ -59,28 +60,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
         holder.btnAddFoodToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(GLOBAL.USER != null){
-                    order.setIdUser(GLOBAL.USER.getId());
-                    int flag = 0;
-                    for(OrderDetails orders : orderDetailsList){
-                        if(orders.getFoodID() == food.getId()){
-                            flag = 1;
-                            orders.setNumber(orders.getNumber()+1);
-                            order.setTotalNumber(order.getTotalNumber()+1);
-                        }
-                    }
-                    if(flag==0){
-                        OrderDetails orderDetails = new OrderDetails(1,order.getId(),food.getId(),food.getName(),1,food.getPrice());
-                        orderDetailsList.add(orderDetails);
-                        order.setTotalNumber(order.getTotalNumber()+1);
-                        Intent intent = new Intent(context, CartActivity.class);
-                        intent.putExtra("order",order);
-                        intent.putExtra("orderdetailslist",(Serializable) orderDetailsList);
-                        context.startActivity(intent);
-                    }
-                } else{
-                    Toast.makeText(context,"Bạn phải đăng nhập để thực hiện tính năng này",Toast.LENGTH_SHORT).show();
-                }
+                listener.AddToCart(food);
 
             }
         });
