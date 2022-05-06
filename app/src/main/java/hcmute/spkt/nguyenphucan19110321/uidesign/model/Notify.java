@@ -68,12 +68,11 @@ public class Notify {
     }
 
     public void InsertToDatabase(Database db){
-        String[] params =new String[5];
-        params[0] = null;
-        params[1]=String.valueOf(this.idUser);
-        params[2]=this.title;
-        params[3]=this.description;
-        params[4]=String.valueOf(this.time.getTime());
-        db.ExecQuery("Insert into Notifies values(?,?,?,?,?)",params);
+        String[] params =new String[4];
+        params[0]=String.valueOf(this.idUser);
+        params[1]=this.title;
+        params[2]=this.description;
+        params[3]=String.valueOf(this.time.getTime());
+        db.ExecQuery("Insert into Notifies values(null,?,?,?,?)",params);
     }
 }

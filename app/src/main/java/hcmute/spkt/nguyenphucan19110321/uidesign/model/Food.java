@@ -70,14 +70,23 @@ public class Food implements Serializable {
     }
 
     public void InsertToDatabase(Database db){
-        String[] params = new String[6] ;
-        params[0]=String.valueOf(this.id);
-        params[1]=this.name;
-        params[2]=this.description;
-        params[3]=this.image;
-        params[4]=String.valueOf(this.price);
-        params[5]=String.valueOf(this.idShop);
-        db.ExecQuery("insert into Foods values(?,?,?,?,?,?)",params);
+        String[] params = new String[5] ;
+        params[0]=this.name;
+        params[1]=this.description;
+        params[2]=this.image;
+        params[3]=String.valueOf(this.price);
+        params[4]=String.valueOf(this.idShop);
+        db.ExecQuery("insert into Foods values(null,?,?,?,?,?)",params);
+    }
+
+    public String[] toParams(){
+        String[] params = new String[5] ;
+        params[0]=this.name;
+        params[1]=this.description;
+        params[2]=this.image;
+        params[3]=String.valueOf(this.price);
+        params[4]=String.valueOf(this.idShop);
+        return params;
     }
 
 }

@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         database = new Database(this,"Foody.sqlite",null,1);
-        DatabaseFactory.CreateDatabase(database);
-        DatabaseFactory.MakeData(database);
-        DatabaseFactory.MakeDataFood(database); bottomNavigation = findViewById(R.id.bottom_navigation);
+        //DatabaseFactory.MakeData(database);
+        //DatabaseFactory.MakeDataFood(database);
+        bottomNavigation = findViewById(R.id.bottom_navigation);
         setEventNavigation();
         LoadUserFromSharePreference();
     }
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void LoadUserFromSharePreference(){
-        SharedPreferences pref = getSharedPreferences("USER",MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(GLOBAL.PREF_USER,MODE_PRIVATE);
         String email = pref.getString("email","");
         String password =pref.getString("password","");
         if(!(email.equals("") || password.equals(""))){

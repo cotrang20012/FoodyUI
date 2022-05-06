@@ -101,9 +101,6 @@ public class CartActivity extends AppCompatActivity implements IChangeNumberOfFo
     }
 
     private void LoadListOrder(){
-        if(Database.ORDER_LIST.size()==0){
-            Database.MakeDataOrder();
-        }
         FoodCartAdapter foodCartAdapter =new FoodCartAdapter(this, GLOBAL.ORDER,GLOBAL.ORDERDETAILS);
         LinearLayoutManager linear =new LinearLayoutManager(this);
         recyclerViewCart.setAdapter(foodCartAdapter);

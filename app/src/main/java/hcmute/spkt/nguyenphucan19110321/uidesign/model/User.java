@@ -118,17 +118,16 @@ public class User {
     }
 
     public void InsertToDatabase(Database db) {
-        String[] params = new String[9];
-        params[0] = null;
-        params[1] = this.name;
-        params[2] = this.avatar;
-        params[3] = this.username;
-        params[4] = this.password;
-        params[5] = this.address;
-        params[6] = this.gender;
-        params[7] = this.phone;
-        params[8] =this.email;
-        db.ExecQuery("insert into Users values(?,?,?,?,?,?,?,?,?)", params);
+        String[] params = new String[8];
+        params[0] = this.name;
+        params[1] = this.avatar;
+        params[2] = this.username;
+        params[3] = this.password;
+        params[4] = this.address;
+        params[5] = this.gender;
+        params[6] = this.phone;
+        params[7] =this.email;
+        db.ExecQuery("insert into Users values(null,?,?,?,?,?,?,?,?)", params);
     }
 
     public void UpdateProfile(Database db) {

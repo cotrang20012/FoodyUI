@@ -79,7 +79,7 @@ public class ShopDetailActivity extends AppCompatActivity {
                     btnSaveShop.setTag(true);
                 }
                 else{
-                    btnSaveShop.setTag(true);
+                    btnSaveShop.setTag(false);
                 }
             }
         }
@@ -186,7 +186,6 @@ public class ShopDetailActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         GLOBAL.ORDER = null;
-        GLOBAL.ORDERDETAILS.clear();
         GLOBAL.ORDERDETAILS = null;
     }
 }

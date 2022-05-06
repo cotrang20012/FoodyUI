@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void LoadDataFromSharePref() {
-        SharedPreferences pref = getSharedPreferences("USER",MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(GLOBAL.PREF_USER,MODE_PRIVATE);
         String username = pref.getString("email","");
         String password =pref.getString("password","");
         this.txtEmailLogin.setText(username);

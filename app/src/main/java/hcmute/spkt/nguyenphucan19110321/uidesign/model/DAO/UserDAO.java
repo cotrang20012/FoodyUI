@@ -37,7 +37,7 @@ public class UserDAO {
     }
 
     public boolean CheckExistEmail(String email){
-        String[] params = new String[2];
+        String[] params = new String[1];
         params[0]=email;
         Cursor cursor = database.SelectData("select * from Users where email=?",params);
         return cursor.moveToNext();

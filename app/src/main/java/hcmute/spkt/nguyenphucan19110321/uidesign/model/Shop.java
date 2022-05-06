@@ -105,16 +105,28 @@ public class Shop implements Serializable {
     }
 
     public void InsertToDatabase(Database db){
-        String[] params = new String[8] ;
-        params[0]=String.valueOf(this.id);
-        params[1]=this.name;
-        params[2]=this.description;
-        params[3]=this.image;
-        params[4]=this.imageSearch;
-        params[5]=this.address;
-        params[6]=this.type;
-        params[7]=String.valueOf(this.rate);
-        db.ExecQuery("insert into Shops values(?,?,?,?,?,?,?,?)",params);
+        String[] params = new String[7] ;
+
+        params[0]=this.name;
+        params[1]=this.description;
+        params[2]=this.image;
+        params[3]=this.imageSearch;
+        params[4]=this.address;
+        params[5]=this.type;
+        params[6]=String.valueOf(this.rate);
+        db.ExecQuery("insert into Shops values(null,?,?,?,?,?,?,?)",params);
+    }
+
+    public String[] ToParams(){
+        String[] params = new String[7] ;
+        params[0]=this.name;
+        params[1]=this.description;
+        params[2]=this.image;
+        params[3]=this.imageSearch;
+        params[4]=this.address;
+        params[5]=this.type;
+        params[6]=String.valueOf(this.rate);
+        return params;
     }
 
     public List<Food> GetFoodInShop(Database db){

@@ -12,14 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UIDesign">
         <activity
+            android:name=".OrderDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".view.PaymentActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".view.CartActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".view.ShopDetailActivity"
             android:exported="true" />

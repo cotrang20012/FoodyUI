@@ -45,11 +45,11 @@ public class SaveShop implements Serializable {
     }
 
     public void InsertToDatabase(Database db) {
-        String[] params = new String[3];
-        params[0] = String.valueOf(this.id);
-        params[1] = String.valueOf(this.idShop);
-        params[2] = String.valueOf(this.idUser);
-        db.ExecQuery("insert into Saveds values(?,?,?)", params);
+        String[] params = new String[2];
+
+        params[0] = String.valueOf(this.idShop);
+        params[1] = String.valueOf(this.idUser);
+        db.ExecQuery("insert into Saveds values(null,?,?)", params);
     }
 
 }
