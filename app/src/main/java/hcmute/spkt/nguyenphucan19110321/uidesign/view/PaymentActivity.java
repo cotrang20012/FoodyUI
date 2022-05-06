@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,7 +28,7 @@ import lombok.Data;
 
 public class PaymentActivity extends AppCompatActivity {
     TextView tvNamePayment,tvAddressPayment,tvTotalItem,tvShippingFee,tvPlatformFee,tvTotalPrice,tvPricePayment,tvShippingPrice,tvPlatformPrice;
-    Button btnPayment;
+    Button btnPayment,btnCanclePayment;
     ImageView imgProfilePayment;
     RecyclerView recyclerViewCartPayment;
 
@@ -37,18 +39,57 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
         SetControls();
 
-        Intent intent = getIntent();
+        LoadData();
 
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String SQL = "";
-                Database database  =new Database(PaymentActivity.this,"Foody.sqlite",null,1);
-                database.ExecQuery(SQL);
+                Database database  = new Database(PaymentActivity.this,GLOBAL.DATABASE_NAME,null,1);
+                String[] params = new String[4];
+                ContentValues values = new ContentValues();
+                values.put("idUser",GLOBAL.ORDER.getIdUser());
+                values.put("nameShop",GLOBAL.ORDER.getNameShop());
+                values.put("totalNumber",GLOBAL.ORDER.getTotalNumber());
+                values.put("price",GLOBAL.ORDER.getPrice());
+                long id = database.ExecQueryGetID("Orders",values);
+                Log.i("SQLite","Insert Order id = "+id);
+                for(OrderDetails order : GLOBAL.ORDERDETAILS){
+                    ContentValues vl = new ContentValues();
+                    vl.put("orderID",(int) id);
+                    vl.put("foodID",order.getFoodID());
+                    vl.put("foodName",order.getFoodName());
+                    vl.put("number",order.getNumber());
+                    vl.put("price",order.getPrice());
+                    database.ExecQueryGetID("OrderDetails",vl);
+                    Log.i("SQLite","Insert OrderDetails id = "+order.getFoodName());
+                }
+                finish();
+                Intent intent = new Intent(PaymentActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnCanclePayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
         LoadListOrder();
+    }
+
+    private void LoadData(){
+        String PricePayment = GLOBAL.formatString(String.valueOf(GLOBAL.ORDER.getPrice()));
+        int totalPrice = GLOBAL.ORDER.getPrice()+20000+2000;
+        String TotalNumber = GLOBAL.formatString(String.valueOf(GLOBAL.ORDER.getTotalNumber()));
+        String TotalPrice = GLOBAL.formatString(String.valueOf(totalPrice));
+        tvPricePayment.setText(PricePayment+"đ");
+        tvNamePayment.setText(GLOBAL.USER.getName().trim()+" - "+GLOBAL.USER.getPhone());
+        tvAddressPayment.setText(GLOBAL.USER.getAddress().trim());
+        tvTotalItem.setText("Tổng cộng: "+TotalNumber+" phần");
+        imgProfilePayment.setImageResource(R.drawable.foody_logo);
+        tvTotalPrice.setText(TotalPrice+"đ");
     }
 
     private void SetControls(){
@@ -64,6 +105,7 @@ public class PaymentActivity extends AppCompatActivity {
         tvPricePayment = findViewById(R.id.tvPricePayment);
         tvPlatformPrice = findViewById(R.id.tvPlatformPrice);
         recyclerViewCartPayment = findViewById(R.id.recycleViewCartPayment);
+        btnCanclePayment = findViewById(R.id.btnCancelPayment);
     }
 
     private void LoadListOrder(){
@@ -73,4 +115,5 @@ public class PaymentActivity extends AppCompatActivity {
         recyclerViewCartPayment.setAdapter(foodCartAdapter);
         recyclerViewCartPayment.setLayoutManager(linear);
     }
+
 }

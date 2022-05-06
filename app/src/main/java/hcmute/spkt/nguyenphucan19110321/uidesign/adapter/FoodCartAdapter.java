@@ -15,6 +15,7 @@ import java.util.List;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodCartHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodHolder;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
 import hcmute.spkt.nguyenphucan19110321.uidesign.event.IChangeNumberOfFoodCart;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Food;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
@@ -41,8 +42,8 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartHolder> {
     @Override
     public void onBindViewHolder(@NonNull FoodCartHolder holder, int position) {
         OrderDetails orderDetails = orderDetailsList.get(position);
-        String TotalPrice = String.valueOf(orderDetails.getPrice() * orderDetails.getNumber());
-        String Price = String.valueOf(orderDetails.getPrice());
+        String TotalPrice = GLOBAL.formatString(String.valueOf(orderDetails.getPrice() * orderDetails.getNumber()));
+        String Price = GLOBAL.formatString(String.valueOf(orderDetails.getPrice()));
         String Number = String.valueOf(orderDetails.getNumber());
         holder.tvFoodNameCart.setText(orderDetails.getFoodName());
         holder.tvNumberofFood.setText(Number);
@@ -55,8 +56,8 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartHolder> {
                     order.setPrice(order.getPrice()-orderDetails.getPrice());
                     ((IChangeNumberOfFoodCart)context).OnChangeNumberOfFood();
                     orderDetails.setNumber(orderDetails.getNumber() - 1);
-                    String TotalPrice = String.valueOf(orderDetails.getPrice() * orderDetails.getNumber());
-                    String Price = String.valueOf(orderDetails.getPrice());
+                    String TotalPrice = GLOBAL.formatString(String.valueOf(orderDetails.getPrice() * orderDetails.getNumber()));
+                    String Price = GLOBAL.formatString(String.valueOf(orderDetails.getPrice()));
                     String Number = String.valueOf(orderDetails.getNumber());
                     holder.tvFoodNameCart.setText(orderDetails.getFoodName());
                     holder.tvNumberofFood.setText(Number);
@@ -73,8 +74,8 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartHolder> {
                 order.setPrice(order.getPrice()+orderDetails.getPrice());
                 ((IChangeNumberOfFoodCart)context).OnChangeNumberOfFood();
                 orderDetails.setNumber(orderDetails.getNumber() + 1);
-                String TotalPrice = String.valueOf(orderDetails.getPrice() * orderDetails.getNumber());
-                String Price = String.valueOf(orderDetails.getPrice());
+                String TotalPrice = GLOBAL.formatString(String.valueOf(orderDetails.getPrice() * orderDetails.getNumber()));
+                String Price = GLOBAL.formatString(String.valueOf(orderDetails.getPrice()));
                 String Number = String.valueOf(orderDetails.getNumber());
                 holder.tvFoodNameCart.setText(orderDetails.getFoodName());
                 holder.tvNumberofFood.setText(Number);

@@ -12,4 +12,29 @@ public class GLOBAL {
     public static List<OrderDetails> ORDERDETAILS;
     public static final String PREF_USER = "PREF_USER";
     public static final String DATABASE_NAME = "Foody.sqlite";
+
+    public static String formatString(String price){
+        String result ;
+        String temp = new StringBuilder(price).reverse().toString();
+        int lenght = temp.length();
+        for(int i = 0 ;  i <= lenght;i++){
+            if(i == 3){
+                StringBuffer newString = new StringBuffer(temp);
+                newString.insert(i,",");
+                temp = newString.toString();
+            }
+            if(i == 7){
+                StringBuffer newString = new StringBuffer(temp);
+                newString.insert(i,",");
+                temp = newString.toString();
+            }
+            if(i == 11){
+                StringBuffer newString = new StringBuffer(temp);
+                newString.insert(i,",");
+                temp = newString.toString();
+            }
+        }
+        result = new StringBuilder(temp).reverse().toString();
+        return result;
+    }
 }

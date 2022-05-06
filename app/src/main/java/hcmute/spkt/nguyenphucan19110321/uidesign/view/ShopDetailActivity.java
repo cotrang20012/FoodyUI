@@ -150,7 +150,7 @@ public class ShopDetailActivity extends AppCompatActivity {
             @Override
             public void AddToCart(Food food) {
                 if(GLOBAL.USER != null){
-                    if(GLOBAL.ORDER ==null){
+                    if(GLOBAL.ORDER == null){
                         GLOBAL.ORDER = new Order(1,GLOBAL.USER.getId(),shop.getName(),new Date(),0,0);
                         GLOBAL.ORDERDETAILS.clear();
                         GLOBAL.ORDERDETAILS = new ArrayList<>();
@@ -171,7 +171,7 @@ public class ShopDetailActivity extends AppCompatActivity {
                         GLOBAL.ORDER.setPrice(GLOBAL.ORDER.getPrice()+orderDetails.getPrice());
                     }
                     btnCart.setVisibility(View.VISIBLE);
-                    btnCart.setText("GIỎ HÀNG");
+                    btnCart.setText("GIỎ HÀNG"+" ("+GLOBAL.ORDER.getTotalNumber()+")");
                 } else{
                     Toast.makeText(getApplicationContext(),"Bạn phải đăng nhập để thực hiện tính năng này",Toast.LENGTH_SHORT).show();
                 }
@@ -187,5 +187,6 @@ public class ShopDetailActivity extends AppCompatActivity {
         super.onDestroy();
         GLOBAL.ORDER = null;
         GLOBAL.ORDERDETAILS.clear();
+        GLOBAL.ORDERDETAILS = null;
     }
 }

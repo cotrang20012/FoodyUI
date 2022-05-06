@@ -13,6 +13,7 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodCartHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.FoodPaymentHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.OrderDetails;
 
@@ -36,15 +37,12 @@ public class FoodPaymentAdapter extends RecyclerView.Adapter<FoodPaymentHolder>{
     @Override
     public void onBindViewHolder(@NonNull FoodPaymentHolder holder, int position) {
         OrderDetails orderDetails = orderDetailsList.get(position);
- //       String TotalPrice = String.valueOf(order.getPrice()*order.getNumber());
-        String Price = String.valueOf(order.getPrice());
-//        String Number = String.valueOf(order.getNumber());
-//        holder.tvFoodNamePayment.setText(order.getName());
-//        holder.tvNoFPayment.setText(Number);
-//        holder.tvFoodPrice.setText(TotalPrice);
+        String TotalPrice = GLOBAL.formatString(String.valueOf(orderDetails.getPrice()*orderDetails.getNumber()));
+        String Number = String.valueOf(orderDetails.getNumber());
+        holder.tvFoodNamePayment.setText(orderDetails.getFoodName());
+        holder.tvNoFPayment.setText("x"+Number);
+        holder.tvFoodPrice.setText(TotalPrice+"đ");
     }
-
-
 
     @Override
     public int getItemCount() {
