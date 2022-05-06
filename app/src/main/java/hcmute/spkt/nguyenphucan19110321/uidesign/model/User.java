@@ -90,14 +90,19 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public User(String username, String password){
-        this.username=username;
+    public User(String email, String password){
+        this.email=email;
         this.password=password;
     }
-    public User(String username, String password,String name){
+    public User(String email,String username, String password,String name){
+        this.email =email;
         this.username=username;
         this.password=password;
         this.name=name;
+        this.address = "";
+        this.gender = "Nam";
+        this.phone = "";
+        this.avatar = "";
     }
 
     public User(int id, String name,String avatar,String username,String password,String address,String gender,String phone,String email){
@@ -114,7 +119,7 @@ public class User {
 
     public void InsertToDatabase(Database db) {
         String[] params = new String[9];
-        params[0] = String.valueOf(this.id);
+        params[0] = null;
         params[1] = this.name;
         params[2] = this.avatar;
         params[3] = this.username;

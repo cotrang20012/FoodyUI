@@ -19,7 +19,7 @@ public class UserDAO {
         params[0]=user.getUsername();
         params[1]=user.getPassword();
 
-        Cursor cursor = database.SelectData("select * from Users where username='"+user.getUsername()+
+        Cursor cursor = database.SelectData("select * from Users where email='"+user.getEmail()+
                 "' and password='"+user.getPassword()+"'");
         if(cursor.moveToNext()){
             int id = cursor.getInt(0);
@@ -34,6 +34,13 @@ public class UserDAO {
             return new User(id,name,avatar,username,password,address,type,phone,email);
         }
         return null;
+    }
+
+    public boolean CheckExistEmail(String email){
+        String[] params = new String[2];
+        params[0]=email;
+        Cursor cursor = database.SelectData("select * from Users where email=?",params);
+        return cursor.moveToNext();
     }
 
     public List<SaveShopMapping> getSavedShop(int idUser){

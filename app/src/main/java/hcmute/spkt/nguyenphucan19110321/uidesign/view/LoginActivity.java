@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void LoadDataFromSharePref() {
         SharedPreferences pref = getSharedPreferences("USER",MODE_PRIVATE);
-        String username = pref.getString("username","");
+        String username = pref.getString("email","");
         String password =pref.getString("password","");
         this.txtEmailLogin.setText(username);
         this.txtPasswordLogin.setText(password);
@@ -68,19 +68,17 @@ public class LoginActivity extends AppCompatActivity {
         UserDAO userDAO = new UserDAO(database);
         User userLogin = userDAO.CheckLogin(user);
         if(userLogin==null){
-            Toast.makeText(this,"Sai tên đăng nhập hoặc mật khẩu",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Sai email hoặc mật khẩu",Toast.LENGTH_SHORT).show();
             return;
         }
         else {
             GLOBAL.USER = userLogin;
-            SharedPreferences.Editor pref = getSharedPreferences("USER",MODE_PRIVATE).edit();
-            pref.putString("username",txtEmailLogin.getText().toString().trim());
+            SharedPreferences.Editor pref = getSharedPreferences(GLOBAL.PREF_USER,MODE_PRIVATE).edit();
+            pref.putString("email",txtEmailLogin.getText().toString().trim());
             pref.putString("password",txtPasswordLogin.getText().toString().trim());
             pref.apply();
             GoToMainActivity();
         }
-
-
     }
 
     private void GoToMainActivity() {

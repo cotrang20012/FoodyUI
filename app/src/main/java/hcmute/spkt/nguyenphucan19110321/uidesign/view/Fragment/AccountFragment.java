@@ -1,5 +1,6 @@
 package hcmute.spkt.nguyenphucan19110321.uidesign.view.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -65,6 +66,9 @@ public class AccountFragment extends Fragment {
                 GLOBAL.USER = null;
                 Toast.makeText(getContext(), "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
                 btnGoToLogin.setText("Đăng nhập");
+                SharedPreferences.Editor pref = getContext().getSharedPreferences(GLOBAL.PREF_USER, Context.MODE_PRIVATE).edit();
+                pref.remove(GLOBAL.PREF_USER);
+                pref.apply();
             }
         });
     }

@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+
+import java.util.regex.Pattern;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.Database;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.DAO.UserDAO;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -40,7 +44,32 @@ public class RegisterActivity extends AppCompatActivity {
         String name =txtName.getText().toString().trim();
         String email = txtEmail.getText().toString().trim();
         String password = txtPassword.getText().toString().trim();
-        User user = new User(email,password,name);
+
+        String EMAIL_PATTERN =
+                "^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$";
+        if(!Pattern.matches(EMAIL_PATTERN,email)){
+            Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(name.length()<2){
+            Toast.makeText(this, "Tên phải dài hơn 1 kí tự", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(password.length()<5){
+            Toast.makeText(this, "Mật khẩu phải dài hơn 5 kí tự", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        UserDAO userDAO = new UserDAO(database);
+        if(userDAO.CheckExistEmail(email)){
+            Toast.makeText(this,"Email đã tồn tại",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int index = email.indexOf("@");
+        String username = "";
+        if(index>-1){
+            username =email.substring(index);
+        }
+        User user = new User(email,username,password,name);
         user.InsertToDatabase(database);
     }
 

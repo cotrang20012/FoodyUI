@@ -10,4 +10,6 @@ public class GLOBAL {
     public static User USER;
     public static Order ORDER;
     public static List<OrderDetails> ORDERDETAILS;
+    public static final String PREF_USER = "PREF_USER";
+    public static final String DATABASE_NAME = "Foody.sqlite";
 }

@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void LoadUserFromSharePreference(){
         SharedPreferences pref = getSharedPreferences("USER",MODE_PRIVATE);
-        String username = pref.getString("username","");
+        String email = pref.getString("email","");
         String password =pref.getString("password","");
-        if(!(username.equals("") || password.equals(""))){
-            User user =new User(username,password);
+        if(!(email.equals("") || password.equals(""))){
+            User user =new User(email,password);
             UserDAO userDAO = new UserDAO(database);
             User userLogin = userDAO.CheckLogin(user);
             if(userLogin!=null){

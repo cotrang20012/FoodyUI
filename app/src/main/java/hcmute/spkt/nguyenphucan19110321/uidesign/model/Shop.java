@@ -131,5 +131,16 @@ public class Shop implements Serializable {
         }
         return foodList;
     }
+    public static Shop GetShopFromCursor(Cursor cursor){
+        int id = cursor.getInt(0);
+        String name = cursor.getString(1);
+        String des = cursor.getString(2);
+        String image = cursor.getString(3);
+        String imageSearch = cursor.getString(4);
+        String address = cursor.getString(5);
+        String type = cursor.getString(6);
+        double rate = cursor.getDouble(7);
+        return new Shop(id, name, des, image, imageSearch, address, type, rate);
+    }
 
 }
