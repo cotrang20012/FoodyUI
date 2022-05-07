@@ -15,7 +15,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.microedition.khronos.opengles.GL;
 
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.FoodCartAdapter;
@@ -49,6 +52,7 @@ public class PaymentActivity extends AppCompatActivity {
                 ContentValues values = new ContentValues();
                 values.put("idUser",GLOBAL.ORDER.getIdUser());
                 values.put("nameShop",GLOBAL.ORDER.getNameShop());
+                values.put("date",(new Date()).getTime());
                 values.put("totalNumber",GLOBAL.ORDER.getTotalNumber());
                 values.put("price",GLOBAL.ORDER.getPrice());
                 long id = database.ExecQueryGetID("Orders",values);
@@ -80,6 +84,8 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     private void LoadData(){
+        GLOBAL.ORDER.setTotalNumber(GLOBAL.ORDERDETAILS.size());
+        GLOBAL.ORDER.setPrice(totalPrice());
         String PricePayment = GLOBAL.formatString(String.valueOf(GLOBAL.ORDER.getPrice()));
         int totalPrice = GLOBAL.ORDER.getPrice()+20000+2000;
         String TotalNumber = GLOBAL.formatString(String.valueOf(GLOBAL.ORDER.getTotalNumber()));
@@ -90,6 +96,14 @@ public class PaymentActivity extends AppCompatActivity {
         tvTotalItem.setText("Tổng cộng: "+TotalNumber+" phần");
         imgProfilePayment.setImageResource(R.drawable.foody_logo);
         tvTotalPrice.setText(TotalPrice+"đ");
+    }
+
+    private int totalPrice(){
+        int total = 0;
+        for (OrderDetails od: GLOBAL.ORDERDETAILS) {
+            total += od.getPrice() * od.getNumber();
+        }
+        return total;
     }
 
     private void SetControls(){

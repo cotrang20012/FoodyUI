@@ -7,7 +7,7 @@ public class Order implements Serializable {
     protected int id;
     protected int idUser;
     protected String nameShop;
-    protected Date time;
+    protected Date date;
     protected int totalNumber;
     protected int price;
 
@@ -44,11 +44,11 @@ public class Order implements Serializable {
     }
 
     public Date getTime() {
-        return time;
+        return date;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setTime(Date date) {
+        this.date = date;
     }
 
     public int getPrice() {
@@ -62,20 +62,20 @@ public class Order implements Serializable {
     public Order(){
 
     }
-    public Order(int id,int idUser, String nameShop, Date time, int price, int totalNumber) {
+    public Order(int id,int idUser, String nameShop, Date date, int price, int totalNumber) {
         this.id = id;
         this.idUser=idUser;
         this.nameShop = nameShop;
-        this.time = time;
+        this.date = date;
         this.price = price;
         this.totalNumber = totalNumber;
     }
 
-    public Order(int id, int idUser, String nameShop, Date time, int price) {
+    public Order(int id, int idUser, String nameShop, Date date, int price) {
         this.id = id;
         this.idUser = idUser;
         this.nameShop = nameShop;
-        this.time = time;
+        this.date = date;
         this.price = price;
     }
 }

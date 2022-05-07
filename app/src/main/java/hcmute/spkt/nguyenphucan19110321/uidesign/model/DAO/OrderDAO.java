@@ -23,8 +23,9 @@ public class OrderDAO {
             int id  = cursor.getInt(0);
             String nameShop = cursor.getString(2);
             Date time = new Date(cursor.getLong(3));
-            int price = cursor.getInt(4);
-            orderList.add(new Order(id,idUser,nameShop,time,price));
+            int totalNumber = cursor.getInt(4);
+            int price = cursor.getInt(5);
+            orderList.add(new Order(id,idUser,nameShop,time,price,totalNumber));
         }
         return orderList;
     }

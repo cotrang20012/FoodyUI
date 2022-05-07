@@ -22,4 +22,11 @@ public class ShopDAO {
         }
         return shopList;
     }
+    public Shop getListShopById(int id){
+        Cursor cursor = database.SelectData("select * from Shops where id ="+id);
+        if (cursor.moveToNext()){
+            return Shop.GetShopFromCursor(cursor);
+        }
+        return null;
+    }
 }

@@ -24,6 +24,7 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.SavedAdapter;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.DatabaseFactory;
 import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
 import hcmute.spkt.nguyenphucan19110321.uidesign.mapping.SaveShopMapping;
+import hcmute.spkt.nguyenphucan19110321.uidesign.model.DAO.ShopDAO;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.DAO.UserDAO;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.SaveShop;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.ShopDetailActivity;
@@ -65,7 +66,13 @@ public class SavedFragment extends Fragment {
         if(GLOBAL.USER!=null){
             UserDAO userDAO =new UserDAO(database);
             List<SaveShopMapping> savedList = userDAO.getSavedShop(GLOBAL.USER.getId());
-            SavedAdapter savedAdapter = new SavedAdapter(this.getContext(), savedList);
+            SavedAdapter savedAdapter = new SavedAdapter(this.getContext(), savedList, new SavedAdapter.IClickItemSavedShopListener() {
+                @Override
+                public void onClickItemSavedShop(View view) {
+                    int position = recyclerViewSaved.getChildAdapterPosition(view);
+                    GoToShopDetail(savedList.get(position));
+                }
+            });
             LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
             recyclerViewSaved.setAdapter(savedAdapter);
             recyclerViewSaved.setVisibility(View.VISIBLE);
@@ -77,11 +84,14 @@ public class SavedFragment extends Fragment {
         }
     }
 
-    private void GoToShopDetail(Shop shop) {
+    private void GoToShopDetail(SaveShopMapping saved) {
         Intent intent = new Intent(this.getContext(), ShopDetailActivity.class);
-        Gson gson = new Gson();
-        String shopJSON = gson.toJson(shop);
-        intent.putExtra("Shop",shopJSON);
+        ShopDAO shopDAO = new ShopDAO(database);
+        Shop shop = shopDAO.getListShopById(saved.getId());
+        if(shop==null){
+            return;
+        }
+        intent.putExtra("Shop",shop);
         startActivity(intent);
     }
 }

@@ -25,9 +25,10 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.view.MainActivity;
 import hcmute.spkt.nguyenphucan19110321.uidesign.view.PaymentActivity;
 
 public class OrderDetailActivity extends AppCompatActivity {
-    TextView tvNameInvoice,tvAddressInvoice,tvTotalItem,tvTotalPrice,tvPriceInvoice,tvShippingPrice,tvPlatformPrice;
-    ImageView imgProfileInvoice;
-    RecyclerView recyclerViewCartInvoice;
+    private TextView tvNameInvoice,tvAddressInvoice,tvTotalItem,tvTotalPrice,tvPriceInvoice,tvShippingPrice,tvPlatformPrice;
+    private ImageView imgProfileInvoice;
+    private Button btnCancelPayment;
+    private RecyclerView recyclerViewCartInvoice;
     private Database database;
     private Order order;
     private List<OrderDetails> detailsList;
@@ -41,6 +42,12 @@ public class OrderDetailActivity extends AppCompatActivity {
         SetControls();
         LoadData();
         LoadListOrder();
+        btnCancelPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void LoadData(){
@@ -66,6 +73,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         tvPlatformPrice = findViewById(R.id.tvPlatformPrice);
         recyclerViewCartInvoice = findViewById(R.id.recycleViewCartInvoice);
         tvTotalItem = findViewById(R.id.tvTotalItemInvoice);
+        btnCancelPayment = findViewById(R.id.btnCancelPayment);
     }
 
     private void LoadListOrder(){

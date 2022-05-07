@@ -59,7 +59,7 @@ public class Database extends SQLiteOpenHelper {
         database.execSQL("DROP TABLE IF EXISTS OrderDetails");
 
         database.execSQL("CREATE TABLE IF NOT EXISTS Orders(id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " idUser INTEGER,nameShop VARCHAR(150), date DATE,totalNumber INTEGER," +
+                " idUser INTEGER,nameShop VARCHAR(150), date LONG,totalNumber INTEGER," +
                 "price INTEGER)");
         database.execSQL("CREATE TABLE IF NOT EXISTS OrderDetails(id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " orderID INTEGER,foodID INTEGER, foodName VARCHAR(150),number INTEGER," +
