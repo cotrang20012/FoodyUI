@@ -54,7 +54,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodHolder> {
         Picasso.get().load(food.getImage()).into(holder.imgFood);
         holder.tvNameFood.setText(food.getName());
         holder.tvDescriptionFood.setText(food.getDescription());
-        holder.tvPriceFood.setText(String.valueOf(food.getPrice()));
+        holder.tvPriceFood.setText(GLOBAL.formatString(String.valueOf(food.getPrice()))+"đ");
         holder.btnAddFoodToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

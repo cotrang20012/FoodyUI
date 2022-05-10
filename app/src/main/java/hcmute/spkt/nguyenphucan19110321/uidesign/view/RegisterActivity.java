@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -20,6 +21,7 @@ import hcmute.spkt.nguyenphucan19110321.uidesign.model.User;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText txtEmail, txtPassword,txtName;
+    private TextView txtGotoLogin;
     private Button btnRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,12 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             onClickRegister();
+        }
+    });
+    txtGotoLogin.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            GoToLogin();
         }
     });
     }
@@ -89,6 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
         txtName =findViewById(R.id.txtNameRegister);
         txtPassword =findViewById(R.id.txtPasswordRegister);
         btnRegister = findViewById(R.id.btnRegister);
+        txtGotoLogin = findViewById(R.id.txtGotoLogin);
     }
 
 

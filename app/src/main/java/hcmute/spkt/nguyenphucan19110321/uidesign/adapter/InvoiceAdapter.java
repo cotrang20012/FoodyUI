@@ -14,6 +14,7 @@ import java.util.List;
 import hcmute.spkt.nguyenphucan19110321.uidesign.R;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.InvoiceHolder;
 import hcmute.spkt.nguyenphucan19110321.uidesign.adapter.holder.NotifyHolder;
+import hcmute.spkt.nguyenphucan19110321.uidesign.data.GLOBAL;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Notify;
 import hcmute.spkt.nguyenphucan19110321.uidesign.model.Order;
 
@@ -48,7 +49,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceHolder> {
     public void onBindViewHolder(@NonNull InvoiceHolder holder, int position) {
         Order invoice = invoiceList.get(position);
         holder.tvTitle.setText(invoice.getNameShop());
-        holder.tvPrice.setText(String.valueOf(invoice.getPrice()));
+        holder.tvPrice.setText(GLOBAL.formatString(String.valueOf(invoice.getPrice()))+"đ");
         holder.tvTime.setText(simpleDateFormat.format(invoice.getTime()));
     }
 

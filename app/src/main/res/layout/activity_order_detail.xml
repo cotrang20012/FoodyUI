@@ -44,7 +44,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:lines="1"
-            android:text="Giỏ Hàng"
+            android:text="Hoá đơn"
             android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="bold"
