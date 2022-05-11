@@ -45,7 +45,7 @@
         <GridView
             android:id="@+id/gridViewFoodHome"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:paddingTop="10dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
@@ -53,7 +53,7 @@
             android:numColumns="2"
             android:stretchMode="columnWidth"
             app:layout_constraintTop_toBottomOf="@id/guidelineTop"
-
+            app:layout_constraintBottom_toBottomOf="parent"
             android:verticalSpacing="5dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
